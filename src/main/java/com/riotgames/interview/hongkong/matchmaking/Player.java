@@ -18,11 +18,13 @@ public class Player {
     private final String name;
     private final long wins;
     private final long losses;
+    private final long winRatio;
 
     public Player(String name, long wins, long losses) {
         this.name = name;
         this.wins = wins;
         this.losses = losses;
+        this.winRatio = wins / (wins + losses);
     }
 
     public String getName() {
@@ -36,5 +38,7 @@ public class Player {
     public long getLosses() {
         return losses;
     }
+
+    public long  getWinRatio() {return winRatio; }
 
 }
