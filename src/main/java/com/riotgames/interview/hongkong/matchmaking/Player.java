@@ -18,13 +18,24 @@ public class Player {
     private final String name;
     private final long wins;
     private final long losses;
-    private final long winRatio;
+    private final float winRatio;
 
     public Player(String name, long wins, long losses) {
         this.name = name;
         this.wins = wins;
         this.losses = losses;
-        this.winRatio = wins / (wins + losses);
+        System.out.print("wins" + wins);
+        System.out.print("losses" + wins);
+        System.out.print("wins + losses" + (wins + losses));
+
+        if (wins + losses == 0) {
+
+            this.winRatio = (float) 0.5;
+        } else {
+
+            float totalGames = wins + losses;
+            this.winRatio = wins / totalGames;
+        }
     }
 
     public String getName() {
@@ -39,6 +50,6 @@ public class Player {
         return losses;
     }
 
-    public long  getWinRatio() {return winRatio; }
+    public double  getWinRatio() {return winRatio; }
 
 }
