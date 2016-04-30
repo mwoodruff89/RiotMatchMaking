@@ -15,6 +15,15 @@ public interface Matchmaker {
     Match findMatch(int playersPerTeam);
 
     /**
+     * Find a match with the given number of players per team and the given matching algorithm
+     * @param playersPerTeam - The number of players required in each team
+     * @param rule - The matching rule / algorithm to be applied to find matches
+     * @return An appropriate match or null if there is no appropriate match
+     */
+    Match findMatchWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule);
+
+
+    /**
      * <p>
      *     Find a set of matches with the given number of players per team
      * </p>
@@ -29,9 +38,4 @@ public interface Matchmaker {
      * </p>
      */
     void enterMatchmaking(Player player);
-
-    /**
-     * Set any relevant editable rules for tha match making
-     */
-    void setRules(MatchmakerImpl.MatchMakingRule rule);
 }

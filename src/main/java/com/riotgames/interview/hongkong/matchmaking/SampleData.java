@@ -7,7 +7,7 @@ public class SampleData {
 
     public static List<Player> players = new ArrayList<Player>();
 
-    public static long averageRating = 0;
+    public static double averageRating = 0;
     /**
      * The average win rating of all the players in the sample data. Helpful for when creating new players as we can
      * try and match them against an 'average' player (or not? =)).
@@ -17,11 +17,11 @@ public class SampleData {
      *
      * @return A float representing the mean / average rating of all players from the sample data
      */
-    public static long averageWinRating() {
+    public static double averageWinRating() {
 
         if(averageRating == 0) {
 
-            long totalRating = 0;
+            double totalRating = 0;
             for (Player player : getPlayers()) {
 
                 totalRating += player.getWinRatio();

@@ -29,11 +29,17 @@ public class MatchmakerImpl implements Matchmaker {
     /**
      * The match making rule / algorithm to be utilised. Default is Elo but can be edited to use a different rule
      */
-    MatchmakerImpl.MatchMakingRule matchingRule = MatchmakerImpl.MatchMakingRule.Elo;
+    public MatchmakerImpl.MatchMakingRule matchingRule;
 
     public Match findMatch(int playersPerTeam) {
 
+        return findMatchWithRule(playersPerTeam, MatchMakingRule.Elo);
+    }
+
+    public Match findMatchWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule) {
+
         this.playersPerTeam = playersPerTeam;
+        this.matchingRule = rule;
 
         Match matchToFind = null;
 
@@ -71,7 +77,7 @@ public class MatchmakerImpl implements Matchmaker {
         return fullyMatchedMatches;
     }
 
-        public void enterMatchmaking(Player player) {
+    public void enterMatchmaking(Player player) {
 
         //Find out if we can add the player to any of the matches currently trying to match
         for (Match match : new ArrayList<Match>(matchingMatches)) {
@@ -102,13 +108,7 @@ public class MatchmakerImpl implements Matchmaker {
         //We didn't find a match for the player so let's create a match for him and add him to team 1
         HashSet<Player> newTeam = new HashSet<Player>();
         newTeam.add(player);
-        Match newMatch = new Match(newTeam, new HashSet<Player>(), playersPerTeam);
-        newMatch.matchMakingRule = matchingRule;
+        Match newMatch = new Match(newTeam, new HashSet<Player>(), playersPerTeam, this);
         matchingMatches.add(newMatch);
-    }
-
-    public void setRules(MatchmakerImpl.MatchMakingRule rule) {
-
-        this.matchingRule = rule;
     }
 }

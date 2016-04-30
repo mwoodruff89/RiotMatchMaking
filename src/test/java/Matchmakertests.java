@@ -29,9 +29,8 @@ public class Matchmakertests {
     @Test
     public void testMatch1v1() {
 
-        testableMatchMaker.setRules(MatchmakerImpl.MatchMakingRule.WinRatio);
         int teamSize = 1;
-        matchedMatch = testableMatchMaker.findMatch(teamSize);
+        matchedMatch = testableMatchMaker.findMatchWithRule(teamSize, MatchmakerImpl.MatchMakingRule.WinRatio);
         //Test isFullyMatched flag is updated correctly
         assert (matchedMatch.isFullyMatched);
 
@@ -43,9 +42,8 @@ public class Matchmakertests {
     @Test
     public void testMatch2v2() {
 
-        testableMatchMaker.setRules(MatchmakerImpl.MatchMakingRule.WinRatio);
         int teamSize = 2;
-        matchedMatch = testableMatchMaker.findMatch(teamSize);
+        matchedMatch = testableMatchMaker.findMatchWithRule(teamSize, MatchmakerImpl.MatchMakingRule.WinRatio);
         assert (matchedMatch.isFullyMatched);
 
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
@@ -59,9 +57,8 @@ public class Matchmakertests {
     @Test
     public void testMatch3v3() {
 
-        testableMatchMaker.setRules(MatchmakerImpl.MatchMakingRule.WinRatio);
         int teamSize = 3;
-        matchedMatch = testableMatchMaker.findMatch(teamSize);
+        matchedMatch = testableMatchMaker.findMatchWithRule(teamSize, MatchmakerImpl.MatchMakingRule.WinRatio);
         assert (matchedMatch.isFullyMatched);
 
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
@@ -74,9 +71,8 @@ public class Matchmakertests {
     @Test
     public void testMatch4v4() {
 
-        testableMatchMaker.setRules(MatchmakerImpl.MatchMakingRule.WinRatio);
         int teamSize = 4;
-        matchedMatch = testableMatchMaker.findMatch(teamSize);
+        matchedMatch = testableMatchMaker.findMatchWithRule(teamSize, MatchmakerImpl.MatchMakingRule.WinRatio);
         assert (matchedMatch.isFullyMatched);
 
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
@@ -89,9 +85,8 @@ public class Matchmakertests {
     @Test
     public void testMatch5v5() {
 
-        testableMatchMaker.setRules(MatchmakerImpl.MatchMakingRule.WinRatio);
         int teamSize = 5;
-        matchedMatch = testableMatchMaker.findMatch(teamSize);
+        matchedMatch = testableMatchMaker.findMatchWithRule(teamSize, MatchmakerImpl.MatchMakingRule.WinRatio);
         assert (matchedMatch.isFullyMatched);
 
         assert (matchedMatch.getTeam1().teamSize() == teamSize);

@@ -31,16 +31,26 @@ public class Match {
     public boolean isFullyMatched = false;
 
     /**
-     * Match making rule to be utilised for matching players for this match. Default is Elo please see the enum for
-     * different rules.
+     * The Matchmaker in charge of adding players and teams to this match
      */
-    public MatchmakerImpl.MatchMakingRule matchMakingRule = MatchmakerImpl.MatchMakingRule.Elo;
+    private MatchmakerImpl matchmaker;
 
-    public Match(HashSet<Player> team1, HashSet<Player> team2, int maxSize) {
+    public Match(HashSet<Player> team1, HashSet<Player> team2, int maxSize, MatchmakerImpl matchMaker) {
 
         this.team1 = new Team(team1);
         this.team2 = new Team(team2);
         this.maxTeamSize = maxSize;
+
+        this.matchmaker = matchMaker;
+
+        if(this.matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
+
+            maxDifference = kMaxDifferencWinRatio;
+
+        } else {
+
+            maxDifference = kMaxDifferenceElo;
+        }
 
         updateMeanRating();
     }
@@ -49,23 +59,6 @@ public class Match {
 
     public Team getTeam2() {
         return team2;
-    }
-
-    /**
-     * Custom setter for the match making rule which will also update the maximum difference when the rule is changed
-     * @param newRule - The new rule to use for adding players to this match.
-     */
-    public void setMatchMakingRule(MatchmakerImpl.MatchMakingRule newRule) {
-
-        this.matchMakingRule = newRule;
-
-        if(this.matchMakingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
-
-            maxDifference = kMaxDifferencWinRatio;
-        } else {
-
-            maxDifference = kMaxDifferenceElo;
-        }
     }
 
     /**
@@ -84,7 +77,7 @@ public class Match {
         } else {
 
             //Match already has players so can only add if the rating falls within the range
-            if(matchMakingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
+            if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
 
                 if(Math.abs(averageRating - rating) <= maxDifference) {
 
@@ -131,25 +124,10 @@ public class Match {
      */
     private void updateMeanRating() {
 
-//        float averageRatingTeam1 = 0;
-//        float averageRatingTeam2 = 0;
-//
-//        if(matchMakingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
-//
-//            averageRatingTeam1 += team1.getAverageWinRating();
-//            averageRatingTeam2 += team2.getAverageWinRating();
-//        } else {
-//
-//            averageRatingTeam1 += team1.getAverageElo();
-//            averageRatingTeam2 += team2.getAverageElo();
-//        }
-//
-//        this.averageRating = (averageRatingTeam1 + averageRatingTeam2) / (team1.teamSize() + team2.teamSize());
-
         float averageRatingTeam1 = 0;
         for (Player player : team1.getPlayers()) {
 
-            if(matchMakingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
+            if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
 
                 averageRatingTeam1 += player.getWinRatio();
             } else {
@@ -160,7 +138,7 @@ public class Match {
         float averageRatingTeam2 = 0;
         for (Player player : team2.getPlayers()) {
 
-            if(matchMakingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
+            if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
 
                 averageRatingTeam2 += player.getWinRatio();
             } else {
