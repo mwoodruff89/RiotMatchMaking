@@ -5,6 +5,25 @@ import java.util.List;
 
 public class SampleData {
 
+    /**
+     * The average win rating of all the players in the sample data. Helpful for when creating new players as we can
+     * try and match them against an 'average' player (or not? =))
+     * @return A float representing the mean / average rating of all players from the sample data
+     */
+    public static long averageWinRating() {
+
+        long totalRating = 0;
+
+        for (Player player : getPlayers()) {
+
+            totalRating += player.getWinRatio();
+        }
+
+        long averageRating = totalRating / getPlayers().size();
+
+        return averageRating;
+    }
+
     public static List<Player> getPlayers() {
         final List<Player> players = new ArrayList<Player>(250);
 

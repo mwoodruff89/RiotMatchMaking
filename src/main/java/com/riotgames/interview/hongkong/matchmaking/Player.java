@@ -39,10 +39,18 @@ public class Player {
      * 1. Provide a 'guess' Elo rating in the Sample Data.
      * 2. Create a 'Dumb' Elo rating and be base the player's initial Elo Rating on the following calculation:
      *
-     * <p> PlayerInitialElo = 1000 * WinRatio </p>
+     * <p> PlayerInitialElo = 1000 * (WinRatio + AverageWinRatio) </p>
      *
-     * Where 1000 represents a base Rating (for example a player with 0 games, or 100 wins and 100 losses, should have a rating of 1000
+     * Where 1000 represents a base Rating (for example a player with 0 games, should have a rating of 1000
+     * And AverageRating represents a offset. This is so the formulae will return 1000 for 50/50 win ratios
+     * and return Elo > 1000 for players with more wins than losses and Elo < 1000 for players with less wins than losses
      *
+     * Examples:
+     * Super Good Player: 1000 * (0.95 + 0.5) = 1450
+     * Good Player: 1000 * (0.7 + 0.5) = 1,200
+     * Bad Player: 1000 * (0.3 + 0.5) = 800
+     * Super Bad Player: 1000 * (0.05 + 0.5) = 550
+     * New Player: 1000
      * <p> In this assignment, I will use solution 2</p>
      *
      * Going forward, the player's Elo Rating will be updated in the proper way whereby more points are awarded /
@@ -52,21 +60,27 @@ public class Player {
      */
     private int eloRating;
 
+    /**
+     * The base Elo Rating for new players.
+     */
+    private int kBaseElo = 1000;
+
     public Player(String name, long wins, long losses) {
+
         this.name = name;
         this.wins = wins;
         this.losses = losses;
-        System.out.print("wins" + wins);
-        System.out.print("losses" + wins);
-        System.out.print("wins + losses" + (wins + losses));
 
         if (wins + losses == 0) {
 
+            //New Player
             this.winRatio = (float) 0.5;
+            this.eloRating = kBaseElo;
         } else {
 
             float totalGames = wins + losses;
             this.winRatio = wins / totalGames;
+            double provElo = Math.floor(kBaseElo * (this.winRatio + SampleData.averageWinRating()));
         }
     }
 
