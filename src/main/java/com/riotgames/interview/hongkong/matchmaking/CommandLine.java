@@ -98,6 +98,13 @@ public class CommandLine {
                         System.out.println(game);
                     }
 
+                    for (Match match : new ArrayList<Match>(matches)) {
+
+                        matches.remove(match);
+                    }
+
+                    ArrayList<Match> secondMatches= matchmaker.findMatchesWithRuleAndIsSorted(matchSize, rule, isSorted);
+
                     totalProbability = totalProbability / matches.size();
                     totalPlayers = totalPlayers / SampleData.getPlayers().size();
                     System.out.printf("AVERAGE Match Win/Lose Probability OF ALL GAMES: %s\n", totalProbability);
