@@ -1,7 +1,5 @@
 package com.riotgames.interview.hongkong.matchmaking;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 /**
@@ -9,6 +7,10 @@ import java.util.List;
  */
 public class MatchmakerImpl implements Matchmaker {
 
+    public enum MatchMakingRule {
+
+        WinRatio, Elo;
+    }
     /**
      * Data structure to contain matches still not fully matched
      */
@@ -23,6 +25,11 @@ public class MatchmakerImpl implements Matchmaker {
      * The maximum amount of players per team for this MatchmakerImpl instance
      */
     private int playersPerTeam = 0;
+
+    /**
+     * The match making rule / algorithm to be utilised. Default is Elo but can be edited to use a different rule
+     */
+    MatchmakerImpl.MatchMakingRule matchingRule = MatchmakerImpl.MatchMakingRule.Elo;
 
     public Match findMatch(int playersPerTeam) {
 
@@ -51,7 +58,15 @@ public class MatchmakerImpl implements Matchmaker {
         //Find out if we can add the player to any of the matches currently trying to match
         for (Match match : new ArrayList<Match>(matchingMatches)) {
 
-            if (match.canAddWithRating(player.getWinRatio())) {
+            Boolean canAdd = false;
+            if(matchingRule == MatchMakingRule.WinRatio) {
+
+                canAdd = match.canAddWithRating(player.getWinRatio());
+            } else {
+
+                canAdd = match.canAddWithRating(player.getEloRating());
+            }
+            if (canAdd) {
 
                 //We can add a player to a match so add him.
                 match.addPlayer(player);
@@ -70,6 +85,12 @@ public class MatchmakerImpl implements Matchmaker {
         HashSet<Player> newTeam = new HashSet<Player>();
         newTeam.add(player);
         Match newMatch = new Match(newTeam, new HashSet<Player>(), playersPerTeam);
+        newMatch.matchMakingRule = matchingRule;
         matchingMatches.add(newMatch);
+    }
+
+    public void setRules(MatchmakerImpl.MatchMakingRule rule) {
+
+        this.matchingRule = rule;
     }
 }

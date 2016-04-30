@@ -58,7 +58,7 @@ public class Player {
      * on how I calculate the player's Elo Rating for each match.
      *
      */
-    private int eloRating;
+    private int eloRating = 0;
 
     /**
      * The base Elo Rating for new players.
@@ -80,7 +80,6 @@ public class Player {
 
             float totalGames = wins + losses;
             this.winRatio = wins / totalGames;
-            double provElo = Math.floor(kBaseElo * (this.winRatio + SampleData.averageWinRating()));
         }
     }
 
@@ -96,6 +95,16 @@ public class Player {
         return losses;
     }
 
-    public double  getWinRatio() {return winRatio; }
+    public double getWinRatio() {return winRatio; }
 
+    public double getEloRating() {
+
+        if(eloRating == 0) {
+
+            double provElo = Math.floor(kBaseElo * (this.winRatio + SampleData.averageWinRating()));
+            this.eloRating = (int) provElo;
+        }
+
+        return this.eloRating;
+    }
 }
