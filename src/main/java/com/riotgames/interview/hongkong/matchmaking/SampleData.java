@@ -1,6 +1,7 @@
 package com.riotgames.interview.hongkong.matchmaking;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SampleData {
@@ -8,10 +9,11 @@ public class SampleData {
     public static List<Player> players = new ArrayList<Player>();
 
     public static double averageRating = 0;
+
     /**
      * The average win rating of all the players in the sample data. Helpful for when creating new players as we can
      * try and match them against an 'average' player (or not? =)).
-     *
+     * <p>
      * We also use this value in order to calculate our 'Dumb Base Elo Rating' for all the players who have already
      * played matches.
      *
@@ -19,7 +21,7 @@ public class SampleData {
      */
     public static double averageWinRating() {
 
-        if(averageRating == 0) {
+        if (averageRating == 0) {
 
             double totalRating = 0;
             for (Player player : getPlayers()) {
@@ -244,4 +246,9 @@ public class SampleData {
         return SampleData.players;
     }
 
+    public static List<Player> getPlayersSortedByWinRatio() {
+
+        Collections.sort(SampleData.players);
+        return SampleData.players;
+    }
 }

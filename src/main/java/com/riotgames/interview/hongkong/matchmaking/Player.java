@@ -13,7 +13,7 @@ package com.riotgames.interview.hongkong.matchmaking;
  * solution.
  * </p>
  */
-public class Player {
+public class Player implements Comparable<Player>{
 
     private final String name;
     private final long wins;
@@ -67,20 +67,44 @@ public class Player {
 
     public Player(String name, long wins, long losses) {
 
-        this.name = name;
-        this.wins = wins;
-        this.losses = losses;
+        if(name.equals("Ann Owen")) {
+            System.out.print("Its ann!");
+        }
+
+
+        //Solve any data corruptions
+        wins = wins < 0 ? 0 : wins;
+        losses = losses < 0 ? 0 : losses;
 
         if (wins + losses == 0) {
 
             //New Player
+            this.wins = 0;
+            this.losses = 0;
             this.winRatio = (float) 0.5;
             this.eloRating = kBaseElo;
         } else {
 
             float totalGames = wins + losses;
-            this.winRatio = wins / totalGames;
+
+            // Check for overflow (some of the data from SampleData causes overflow here!)
+            // Overflow occured. My solution will be to normalise the data (by dividing to make it a 3 digit number)
+            // as logically it would be impossible for a player to get Long.Max wins or losses in reality.
+            if(totalGames < 0) {
+
+                this.wins = 0;
+                this.losses = 0;
+                this.winRatio = (float) 0.5;
+                this.eloRating = kBaseElo;
+            } else {
+
+                this.wins = wins;
+                this.losses = losses;
+                this.winRatio = this.wins / totalGames;
+            }
         }
+
+        this.name = name;
     }
 
     public String getName() {
@@ -111,5 +135,19 @@ public class Player {
     public void setEloRating(int newElo) {
 
         this.eloRating = newElo;
+    }
+
+
+    public int compareTo(Player player) {
+
+        if(winRatio > player.getWinRatio()) {
+
+            return 1;
+        } else if(winRatio < player.getWinRatio()) {
+
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

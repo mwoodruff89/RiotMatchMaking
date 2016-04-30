@@ -1,20 +1,10 @@
-import com.riotgames.interview.hongkong.matchmaking.Matchmaker;
-import org.junit.Before;
 import org.junit.Test;
 import com.riotgames.interview.hongkong.matchmaking.MatchmakerImpl;
-import com.riotgames.interview.hongkong.matchmaking.Match;
-import com.riotgames.interview.hongkong.matchmaking.Player;
-import com.riotgames.interview.hongkong.matchmaking.Team;
-import com.riotgames.interview.hongkong.matchmaking.Game;
-
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
 
 /**
  * Created by michaelwoodruff on 29/4/2016.
  */
-public class Matchmakertests extends EloTests {
+public class WinRatioTests extends EloTests {
 
     @Test
     public void testMatch1v1() {

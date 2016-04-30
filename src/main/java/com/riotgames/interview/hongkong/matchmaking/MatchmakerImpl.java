@@ -43,7 +43,14 @@ public class MatchmakerImpl implements Matchmaker {
 
         Match matchToFind = null;
 
-        List<Player> playerList = SampleData.getPlayers();
+        List<Player> playerList;
+        if(this.matchingRule == MatchMakingRule.WinRatio) {
+
+            playerList = SampleData.getPlayersSortedByWinRatio();
+        } else {
+
+            playerList = SampleData.getPlayers();
+        }
 
         //Add all players to the match making data structure
         for (Player player : playerList) {

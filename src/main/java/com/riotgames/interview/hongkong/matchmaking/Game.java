@@ -38,9 +38,23 @@ public class Game {
 
     /**
      * The K factor used for how much a win / loss will affect a player's rating. The higher the K value, the more
-     * unstable the user's rating will be.
+     * unstable the user's rating will be. The values below have been deduced following the Wikipedia article on Elo.
      */
-    private final int KFactor = 32;
+
+    /**
+     * KFactor for players wh have played less than 30 games
+     */
+    private final int kFactorHigh = 30;
+
+    /**
+     * KFactor for players under 2400 rating
+     */
+    private final int kFactorMid = 15;
+
+    /**
+     * KFactor for players above 2400 and have atleast 30 games.
+     */
+    private final int kFactorLow = 10;
 
     /**
      * Init helper method. Calculates the win probability of team 1 winning (and inversely team 2 winning)
@@ -83,7 +97,7 @@ public class Game {
         //Update winning player scores
         for (Player winningPlayer : winningTeam.getPlayers()) {
 
-            int newElo = (int)(winningPlayer.getEloRating() + KFactor * (1 - expectedScoreWinner));
+            int newElo = (int)(winningPlayer.getEloRating() + kFactorForPlayer(winningPlayer) * (1 - expectedScoreWinner));
             System.out.printf("\nWinning Player: Old Score: %s New Score %s", winningPlayer.getEloRating(), newElo);
             winningPlayer.setEloRating(newElo);
         }
@@ -91,12 +105,34 @@ public class Game {
         //Update loosing player scores
         for(Player losingPlayer : losingTeam.getPlayers()) {
 
-            int newElo = (int)(losingPlayer.getEloRating() + KFactor * (0 - expectedScoreLoser));
+            int newElo = (int)(losingPlayer.getEloRating() + kFactorForPlayer(losingPlayer) * (0 - expectedScoreLoser));
             System.out.printf("\nLosing Player. Old Score: %s New Score %s", losingPlayer.getEloRating(), newElo);
             losingPlayer.setEloRating(newElo);
         }
     }
 
+    /**
+     * Given a player, will determine the appropriate kFactor to use for him
+     * @param player - The given player with a Elo Rating and total matches which is used to deduce the k factor
+     * @return An integer represent the kFactor to be used
+     */
+    private int kFactorForPlayer(Player player) {
+
+        int kFactor = 0;
+
+        if(player.getEloRating() > 2400 && player.getWins() + player.getLosses() > 30) {
+
+            kFactor = kFactorHigh;
+        } else if(player.getEloRating() > 2400 && player.getWins() + player.getLosses() < 30) {
+
+            kFactor = kFactorLow;
+        } else if(player.getEloRating() < 2400) {
+
+            kFactor = kFactorMid;
+        }
+
+        return kFactor;
+    }
     /**
      * Helper Method. Uses basic Java's basic random math function to get a random double between 0->1.
      * This number is then used to deduce the winner based on each teams winning probabilities
