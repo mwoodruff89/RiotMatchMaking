@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="hongkong:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/hongkong_jar</output-path>
+    <root id="archive" name="hongkong.jar">
+      <element id="module-output" name="hongkong" />
+    </root>
+  </artifact>
+</component>
