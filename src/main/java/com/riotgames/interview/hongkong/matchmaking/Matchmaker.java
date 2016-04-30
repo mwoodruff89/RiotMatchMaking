@@ -1,5 +1,7 @@
 package com.riotgames.interview.hongkong.matchmaking;
 
+import java.util.ArrayList;
+
 public interface Matchmaker {
 
     /**
@@ -11,6 +13,15 @@ public interface Matchmaker {
      * @return an appropriate match or null if there is no appropriate match
      */
     Match findMatch(int playersPerTeam);
+
+    /**
+     * <p>
+     *     Find a set of matches with the given number of players per team
+     * </p>
+     * @param playersPerTeam The number of players required in each team
+     * @return an appropriate match or null if there is no appropriate match
+     */
+    ArrayList<Match> findMatches(int playersPerTeam);
 
     /**
      * <p>

@@ -5,6 +5,9 @@ import com.riotgames.interview.hongkong.matchmaking.MatchmakerImpl;
 import com.riotgames.interview.hongkong.matchmaking.Match;
 import com.riotgames.interview.hongkong.matchmaking.Player;
 import com.riotgames.interview.hongkong.matchmaking.Team;
+import com.riotgames.interview.hongkong.matchmaking.Game;
+
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -168,6 +171,19 @@ public class Matchmakertests {
 
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam1());
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam2());
+    }
+
+    @Test
+    public void testGame() {
+
+        int teamSize = 5;
+        ArrayList<Match> matchedMatches = testableMatchMaker.findMatches(5);
+
+        for (Match match : matchedMatches) {
+
+            Game newGame = new Game(match);
+            newGame.playMatch();
+        }
     }
 
     /**

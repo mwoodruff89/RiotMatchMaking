@@ -45,6 +45,8 @@ public class MatchmakerImpl implements Matchmaker {
             enterMatchmaking(player);
             if(!fullyMatchedMatches.isEmpty()) {
 
+                //Note: break and return here as this function returns a Single match. Therefore just return the first
+                //found match
                 matchToFind = fullyMatchedMatches.get(0);
                 break;
             }
@@ -53,7 +55,23 @@ public class MatchmakerImpl implements Matchmaker {
         return matchToFind;
     }
 
-    public void enterMatchmaking(Player player) {
+    public ArrayList<Match> findMatches(int playersPerTeam) {
+
+        this.playersPerTeam = playersPerTeam;
+
+        Match matchToFind = null;
+
+        List<Player> playerList = SampleData.getPlayers();
+
+        for (Player player : playerList) {
+
+            enterMatchmaking(player);
+        }
+
+        return fullyMatchedMatches;
+    }
+
+        public void enterMatchmaking(Player player) {
 
         //Find out if we can add the player to any of the matches currently trying to match
         for (Match match : new ArrayList<Match>(matchingMatches)) {

@@ -107,4 +107,9 @@ public class Player {
 
         return this.eloRating;
     }
+
+    public void setEloRating(int newElo) {
+
+        this.eloRating = newElo;
+    }
 }
