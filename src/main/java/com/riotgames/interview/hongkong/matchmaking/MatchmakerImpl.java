@@ -19,8 +19,14 @@ public class MatchmakerImpl implements Matchmaker {
      */
     private final ArrayList<Match> fullyMatchedMatches = new ArrayList<Match>();
 
+    /**
+     * The maximum amount of players per team for this MatchmakerImpl instance
+     */
+    private int playersPerTeam = 0;
+
     public Match findMatch(int playersPerTeam) {
-        // TODO be sure to implement this :D
+
+        this.playersPerTeam = playersPerTeam;
 
         Match matchToFind = null;
 
@@ -63,7 +69,7 @@ public class MatchmakerImpl implements Matchmaker {
         //We didn't find a match for the player so let's create a match for him and add him to team 1
         HashSet<Player> newTeam = new HashSet<Player>();
         newTeam.add(player);
-        Match newMatch = new Match(newTeam, new HashSet<Player>());
+        Match newMatch = new Match(newTeam, new HashSet<Player>(), playersPerTeam);
         matchingMatches.add(newMatch);
     }
 }

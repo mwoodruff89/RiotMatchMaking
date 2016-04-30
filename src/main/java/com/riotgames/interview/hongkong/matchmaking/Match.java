@@ -6,17 +6,21 @@ public class Match {
 
     private HashSet<Player> team1;
     private HashSet<Player> team2;
-    private final int kMaxTeamSize = 1;
+
+    /**
+     * The maximum size for each team in this match. i.e. if it's 5 then it's a 5v5 match etc.
+     */
+    private int maxTeamSize = 0;
 
     /**
      * The maximum difference of the win rating between two players
      */
-    private double kMaxDifference = 0.1;
+    public double kMaxDifference = 0.1;
 
     /**
      * The average win rating of the players
      */
-    private double averageWinRating = 0;
+    public double averageWinRating = 0;
 
     /**
      * Flag instance variable indicating when the maximum amount of players have been added to each team
@@ -24,9 +28,11 @@ public class Match {
      */
     public boolean isFullyMatched = false;
 
-    public Match(HashSet<Player> team1, HashSet<Player> team2) {
+    public Match(HashSet<Player> team1, HashSet<Player> team2, int maxSize) {
+
         this.team1 = team1;
         this.team2 = team2;
+        this.maxTeamSize = maxSize;
 
         updateMeanRating();
     }
@@ -50,9 +56,11 @@ public class Match {
 
         if(team1.isEmpty() && team2.isEmpty()) {
 
+            //Both empty so basically starting a new match
             canAdd = true;
         } else if(Math.abs(averageWinRating - rating) <= kMaxDifference) {
 
+            //Match already has players so can only add if the rating falls within the range
             canAdd = true;
         }
 
@@ -66,15 +74,15 @@ public class Match {
      */
     public void addPlayer(Player player) {
 
-        if(team1.isEmpty()) {
+        if(team1.size() < maxTeamSize) {
 
             team1.add(player);
-        } else {
+        } else if (team2.size() < maxTeamSize){
 
             team2.add(player);
         }
 
-        if(team1.size() == kMaxTeamSize && team2.size() == kMaxTeamSize) {
+        if(team1.size() == maxTeamSize && team2.size() == maxTeamSize) {
 
             isFullyMatched = true;
         }
