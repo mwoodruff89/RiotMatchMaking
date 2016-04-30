@@ -98,7 +98,7 @@ public class Game {
         for (Player winningPlayer : winningTeam.getPlayers()) {
 
             int newElo = (int)(winningPlayer.getEloRating() + kFactorForPlayer(winningPlayer) * (1 - expectedScoreWinner));
-            System.out.printf("\nWinning Player: Old Score: %s New Score %s", winningPlayer.getEloRating(), newElo);
+            //System.out.printf("\nWinning Player: Old Score: %s New Score %s", winningPlayer.getEloRating(), newElo);
             winningPlayer.setEloRating(newElo);
         }
 
@@ -106,7 +106,7 @@ public class Game {
         for(Player losingPlayer : losingTeam.getPlayers()) {
 
             int newElo = (int)(losingPlayer.getEloRating() + kFactorForPlayer(losingPlayer) * (0 - expectedScoreLoser));
-            System.out.printf("\nLosing Player. Old Score: %s New Score %s", losingPlayer.getEloRating(), newElo);
+            //System.out.printf("\nLosing Player. Old Score: %s New Score %s", losingPlayer.getEloRating(), newElo);
             losingPlayer.setEloRating(newElo);
         }
     }
@@ -144,14 +144,28 @@ public class Game {
 
         if(num < winningProbility) {
 
-            System.out.println("\n\nTeam 1 Won!");
             winningTeam = match.getTeam1();
             losingTeam = match.getTeam2();
         } else {
 
-            System.out.println("\n\nTeam 2 Won!");
             winningTeam = match.getTeam2();
             losingTeam = match.getTeam1();
+        }
+    }
+
+    public String toString() {
+
+        if(losingTeam != null && winningTeam != null) {
+
+            if(winningTeam == match.getTeam1()) {
+                return "Team 1 Won!";
+            } else if (winningTeam == match.getTeam2()) {
+                return "Team 2 Won!";
+            }
+            return "Who won?";
+        } else {
+
+            return "\nProbabilty of Team 1 Winning: " + winningProbility + "\nProbability of Team 2 Winning: " + (1 - winningProbility);
         }
     }
 }

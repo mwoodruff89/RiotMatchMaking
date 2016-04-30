@@ -151,4 +151,10 @@ public class Match {
         totalAverage = totalAverage / (team1.teamSize() + team2.teamSize());
         this.averageRating = totalAverage;
     }
+
+    public String toString() {
+
+        return "*-- Match ---*\nTeam Size: " + maxTeamSize + "\nAverage Rating: " + averageRating +
+                "\nTeam 1: " + team1 + "\nTeam 2: " + team2;
+    }
 }

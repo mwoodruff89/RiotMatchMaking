@@ -67,11 +67,6 @@ public class Player implements Comparable<Player>{
 
     public Player(String name, long wins, long losses) {
 
-        if(name.equals("Ann Owen")) {
-            System.out.print("Its ann!");
-        }
-
-
         //Solve any data corruptions
         wins = wins < 0 ? 0 : wins;
         losses = losses < 0 ? 0 : losses;
