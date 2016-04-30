@@ -20,12 +20,13 @@ public class CommandLine {
 
                 System.out.println("Commands To Help You: ");
                 System.out.println("java CommandLine Help ");
-                System.out.println("java CommandLine <Match-Type> <Matching-Alg>");
-                System.out.println("java CommandLine <Match-Type> <Matching-Alg> <Team-Size>");
+                System.out.println("java CommandLine <Match-Type> <Matching-Alg> <Sorting-Alg>");
+                System.out.println("java CommandLine <Match-Type> <Matching-Alg> <Sorting-Alg> <Team-Size>");
                 System.out.println("java CommandLine Simulator");
                 System.out.println("Arguments:");
                 System.out.println("<Match-Type> = [Single | Multiple]");
                 System.out.println("<Matching-Alg> = [Elo | WinRating]");
+                System.out.println("<Sorting-Alg> = [NonSorted | Sorted]");
                 System.out.println("<TeamSize> > 0>");
             } else if (args[0].equals("Single") || args[0].equals("Multiple")) {
 
@@ -48,18 +49,32 @@ public class CommandLine {
                     rule = MatchmakerImpl.MatchMakingRule.Elo;
                 }
 
-                //Optional Match Size
-                int matchSize = 5;
+                Boolean isSorted = false;
                 if(args.length >= 3) {
 
-                    matchSize = Integer.parseInt(args[2]);
+                    if(args[2].equals("Sorted")) {
+
+                        isSorted = true;
+                    } else if(!args[2].equals("NonSorted")) {
+
+                        System.out.println("Invalid Sorting Algorithm");
+                    }
+                } else {
+
+                    isSorted = true;
+                }
+                //Optional Match Size
+                int matchSize = 5;
+                if(args.length >= 4) {
+
+                    matchSize = Integer.parseInt(args[3]);
                 }
 
                 Matchmaker matchmaker = new MatchmakerImpl();
 
                 if(args[0].equals("Single")) {
 
-                    Match match = matchmaker.findMatchWithRule(matchSize, rule);
+                    Match match = matchmaker.findMatchWithRuleAndIsSorted(matchSize, rule, isSorted);
                     System.out.println(match);
                     Game game = new Game(match);
                     System.out.println(game);
@@ -67,7 +82,7 @@ public class CommandLine {
                     System.out.println(game);
                 } else {
 
-                    ArrayList<Match> matches = matchmaker.findMatchesWithRule(matchSize, rule);
+                    ArrayList<Match> matches = matchmaker.findMatchesWithRuleAndIsSorted(matchSize, rule, isSorted);
                     System.out.printf("TOTAL MATCHES: %s\n", matches.size());
                     double totalProbability = 0;
                     double totalPlayers = 0;

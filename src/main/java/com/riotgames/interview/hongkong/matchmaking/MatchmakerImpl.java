@@ -11,6 +11,7 @@ public class MatchmakerImpl implements Matchmaker {
 
         WinRatio, Elo;
     }
+
     /**
      * Data structure to contain matches still not fully matched
      */
@@ -39,16 +40,27 @@ public class MatchmakerImpl implements Matchmaker {
 
     public Match findMatchWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule) {
 
+        return findMatchWithRuleAndIsSorted(playersPerTeam, rule, true);
+    }
+
+    public Match findMatchWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted) {
+
         this.playersPerTeam = playersPerTeam;
         this.matchingRule = rule;
         Match matchToFind = null;
 
-        if(this.matchingRule == MatchMakingRule.WinRatio) {
+        if(isSorted) {
 
-            playerList = SampleData.getPlayersSortedByWinRatio();
+            if (this.matchingRule == MatchMakingRule.WinRatio) {
+
+                playerList = SampleData.getPlayersSortedByWinRatio();
+            } else {
+
+                playerList = SampleData.getPlayersSortedByElo();
+            }
         } else {
 
-            playerList = SampleData.getPlayersSortedByElo();
+            playerList = SampleData.getPlayers();
         }
 
         //Add all players to the match making data structure
@@ -67,18 +79,33 @@ public class MatchmakerImpl implements Matchmaker {
         return matchToFind;
     }
 
+    public ArrayList<Match> findMatches(int playersPerTeam) {
+
+        return findMatchesWithRule(playersPerTeam, MatchMakingRule.Elo);
+    }
+
     public ArrayList<Match> findMatchesWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule) {
+
+        return findMatchesWithRuleAndIsSorted(playersPerTeam, rule, true);
+    }
+
+    public ArrayList<Match> findMatchesWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted) {
 
         this.playersPerTeam = playersPerTeam;
         this.matchingRule = rule;
-        Match matchToFind = null;
 
-        if(this.matchingRule == MatchMakingRule.WinRatio) {
+        if(isSorted) {
 
-            playerList = SampleData.getPlayersSortedByWinRatio();
+            if (this.matchingRule == MatchMakingRule.WinRatio) {
+
+                playerList = SampleData.getPlayersSortedByWinRatio();
+            } else {
+
+                playerList = SampleData.getPlayersSortedByElo();
+            }
         } else {
 
-            playerList = SampleData.getPlayersSortedByElo();
+            playerList = SampleData.getPlayers();
         }
 
         for (Player player : playerList) {
@@ -87,11 +114,6 @@ public class MatchmakerImpl implements Matchmaker {
         }
 
         return fullyMatchedMatches;
-    }
-
-    public ArrayList<Match> findMatches(int playersPerTeam) {
-
-        return findMatchesWithRule(playersPerTeam, MatchMakingRule.Elo);
     }
 
     public void enterMatchmaking(Player player) {

@@ -22,6 +22,15 @@ public interface Matchmaker {
      */
     Match findMatchWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule);
 
+    /**
+     * Find a match with the given number of players per team, a given matching algorithm and whether the Player List
+     * Should be sorted before entering them to the match making system
+     * @param playersPerTeam - The number of players required in each team
+     * @param rule - The matching rule / algorithm to be applied to find matches
+     * @param isSorted - Whether the match maker will sort the player array list first before extracting players
+     * @return
+     */
+    Match findMatchWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted);
 
     /**
      * <p>
@@ -34,13 +43,25 @@ public interface Matchmaker {
 
     /**
      * <p>
-     *     Find a set of matches with the given number of players per team the the given matching algorithm
+     *     Find a set of matches with the given number of players per team and the given matching algorithm
      * </p>
      * @param playersPerTeam - The number of players required in each team
      * @param rule - The matching rule / algorithm to be applied to find matches
      * @return - An appropriate lise of matches of null if there are no appropriate matches
      */
     ArrayList<Match> findMatchesWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule);
+
+    /**
+     * <p>
+     *     Find a set of matches with the given number of players per team, a given matching algorithm adnd whether the
+     *     player list should be sorted before entering them to the match making system.
+     * </p>
+     * @param playersPerTeam The number of players required in each team
+     * @param rule - The matching rule / algorithm to be applied to find matches
+     * @param isSorted - Whether the match maker will sort the player array list first before extracting players
+     * @return
+     */
+    ArrayList<Match> findMatchesWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted);
 
     /**
      * <p>
