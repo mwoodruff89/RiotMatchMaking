@@ -4,6 +4,7 @@ import org.junit.Test;
 import com.riotgames.interview.hongkong.matchmaking.MatchmakerImpl;
 import com.riotgames.interview.hongkong.matchmaking.Match;
 import com.riotgames.interview.hongkong.matchmaking.Player;
+import com.riotgames.interview.hongkong.matchmaking.Team;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -32,8 +33,8 @@ public class Matchmakertests {
         assert (matchedMatch.isFullyMatched);
 
         //Test all team sizes are correct
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
     }
 
     @Test
@@ -44,8 +45,8 @@ public class Matchmakertests {
         matchedMatch = testableMatchMaker.findMatch(teamSize);
         assert (matchedMatch.isFullyMatched);
 
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         //Test all players in the team are within the rating
         assertAllPlayersHaveValidWinRating(matchedMatch.getTeam1());
@@ -60,8 +61,8 @@ public class Matchmakertests {
         matchedMatch = testableMatchMaker.findMatch(teamSize);
         assert (matchedMatch.isFullyMatched);
 
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         assertAllPlayersHaveValidWinRating(matchedMatch.getTeam1());
         assertAllPlayersHaveValidWinRating(matchedMatch.getTeam2());
@@ -75,8 +76,8 @@ public class Matchmakertests {
         matchedMatch = testableMatchMaker.findMatch(teamSize);
         assert (matchedMatch.isFullyMatched);
 
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         assertAllPlayersHaveValidWinRating(matchedMatch.getTeam1());
         assertAllPlayersHaveValidWinRating(matchedMatch.getTeam2());
@@ -90,8 +91,8 @@ public class Matchmakertests {
         matchedMatch = testableMatchMaker.findMatch(teamSize);
         assert (matchedMatch.isFullyMatched);
 
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         assertAllPlayersHaveValidWinRating(matchedMatch.getTeam1());
         assertAllPlayersHaveValidWinRating(matchedMatch.getTeam2());
@@ -105,9 +106,11 @@ public class Matchmakertests {
         //Test isFullyMatched flag is updated correctly
         assert (matchedMatch.isFullyMatched);
 
+        assetAllPlayersHaveValidEloRating(matchedMatch.getTeam1());
+        assetAllPlayersHaveValidEloRating(matchedMatch.getTeam2());
         //Test all team sizes are correct
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
     }
 
     @Test
@@ -117,8 +120,8 @@ public class Matchmakertests {
         matchedMatch = testableMatchMaker.findMatch(teamSize);
         assert (matchedMatch.isFullyMatched);
 
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         //Test all players in the team are within the rating
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam1());
@@ -132,8 +135,8 @@ public class Matchmakertests {
         matchedMatch = testableMatchMaker.findMatch(teamSize);
         assert (matchedMatch.isFullyMatched);
 
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam1());
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam2());
@@ -146,8 +149,8 @@ public class Matchmakertests {
         matchedMatch = testableMatchMaker.findMatch(teamSize);
         assert (matchedMatch.isFullyMatched);
 
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam1());
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam2());
@@ -160,8 +163,8 @@ public class Matchmakertests {
         matchedMatch = testableMatchMaker.findMatch(teamSize);
         assert (matchedMatch.isFullyMatched);
 
-        assert (matchedMatch.getTeam1().size() == teamSize);
-        assert (matchedMatch.getTeam2().size() == teamSize);
+        assert (matchedMatch.getTeam1().teamSize() == teamSize);
+        assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam1());
         assetAllPlayersHaveValidEloRating(matchedMatch.getTeam2());
@@ -172,18 +175,18 @@ public class Matchmakertests {
      * its' matches rating range
      * @param team - The team which will be tested to see if every team member is within the maximum rating difference
      */
-    private void assertAllPlayersHaveValidWinRating(Set<Player> team) {
+    private void assertAllPlayersHaveValidWinRating(Team team) {
 
-        for (Player player : new HashSet<Player>(team)) {
+        for (Player player : team.getPlayers()) {
 
             double ratingDifference = player.getWinRatio() - matchedMatch.averageRating;
             assert (Math.abs(ratingDifference) < matchedMatch.maxDifference);
         }
     }
 
-    private void assetAllPlayersHaveValidEloRating(Set<Player> team) {
+    private void assetAllPlayersHaveValidEloRating(Team team) {
 
-        for (Player player : new HashSet<Player>(team)) {
+        for (Player player : team.getPlayers()) {
 
             double ratingDifference = player.getEloRating() - matchedMatch.averageRating;
             assert (Math.abs(ratingDifference) < matchedMatch.maxDifference);

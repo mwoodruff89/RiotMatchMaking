@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 public class Match {
 
-    private HashSet<Player> team1;
-    private HashSet<Player> team2;
+    private Team team1;
+    private Team team2;
 
     private double kMaxDifferenceElo = 20;
     private double kMaxDifferencWinRatio = 0.1;
@@ -38,18 +38,16 @@ public class Match {
 
     public Match(HashSet<Player> team1, HashSet<Player> team2, int maxSize) {
 
-        this.team1 = team1;
-        this.team2 = team2;
+        this.team1 = new Team(team1);
+        this.team2 = new Team(team2);
         this.maxTeamSize = maxSize;
 
         updateMeanRating();
     }
 
-    public Set<Player> getTeam1() {
-        return team1;
-    }
+    public Team getTeam1() { return team1; }
 
-    public Set<Player> getTeam2() {
+    public Team getTeam2() {
         return team2;
     }
 
@@ -79,7 +77,7 @@ public class Match {
 
         boolean canAdd = false;
 
-        if(team1.isEmpty() && team2.isEmpty()) {
+        if(team1.teamSize() == 0 && team2.teamSize() == 0) {
 
             //Both empty so basically starting a new match
             canAdd = true;
@@ -111,15 +109,15 @@ public class Match {
      */
     public void addPlayer(Player player) {
 
-        if(team1.size() < maxTeamSize) {
+        if(team1.teamSize() < maxTeamSize) {
 
-            team1.add(player);
-        } else if (team2.size() < maxTeamSize){
+            team1.addPlayer(player);
+        } else if (team2.teamSize() < maxTeamSize){
 
-            team2.add(player);
+            team2.addPlayer(player);
         }
 
-        if(team1.size() == maxTeamSize && team2.size() == maxTeamSize) {
+        if(team1.teamSize() == maxTeamSize && team2.teamSize() == maxTeamSize) {
 
             isFullyMatched = true;
         }
@@ -133,30 +131,46 @@ public class Match {
      */
     private void updateMeanRating() {
 
-        float totalRatingTeam1 = 0;
-        for (Player player : new HashSet<Player>(this.team1)) {
+//        float averageRatingTeam1 = 0;
+//        float averageRatingTeam2 = 0;
+//
+//        if(matchMakingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
+//
+//            averageRatingTeam1 += team1.getAverageWinRating();
+//            averageRatingTeam2 += team2.getAverageWinRating();
+//        } else {
+//
+//            averageRatingTeam1 += team1.getAverageElo();
+//            averageRatingTeam2 += team2.getAverageElo();
+//        }
+//
+//        this.averageRating = (averageRatingTeam1 + averageRatingTeam2) / (team1.teamSize() + team2.teamSize());
+
+        float averageRatingTeam1 = 0;
+        for (Player player : team1.getPlayers()) {
 
             if(matchMakingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
 
-                totalRatingTeam1 += player.getWinRatio();
+                averageRatingTeam1 += player.getWinRatio();
             } else {
-
-                totalRatingTeam1 += player.getEloRating();
+                averageRatingTeam1 += team1.getAverageElo();
             }
         }
 
-        float totalRatingTeam2 = 0;
-        for (Player player : new HashSet<Player>(this.team2)) {
+        float averageRatingTeam2 = 0;
+        for (Player player : team2.getPlayers()) {
 
             if(matchMakingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
 
-                totalRatingTeam2 += player.getWinRatio();
+                averageRatingTeam2 += player.getWinRatio();
             } else {
 
-                totalRatingTeam2 += player.getEloRating();
+                averageRatingTeam2 += player.getEloRating();
             }
         }
 
-        this.averageRating = (totalRatingTeam1 + totalRatingTeam2) / (this.team1.size() + this.team2.size());
+        float totalAverage = averageRatingTeam1 + averageRatingTeam2;
+        totalAverage = totalAverage / (team1.teamSize() + team2.teamSize());
+        this.averageRating = totalAverage;
     }
 }
