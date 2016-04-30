@@ -65,7 +65,7 @@ public class Team {
 
         players.add(player);
         totalElo += player.getEloRating();
-        totalWinRating =+ player.getWinRatio();
+        totalWinRating += player.getWinRatio();
 
         averageElo = totalElo / teamSize();
         averageWinRating = totalWinRating / teamSize();
