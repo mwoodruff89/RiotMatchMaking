@@ -41,9 +41,7 @@ public class MatchmakerImpl implements Matchmaker {
 
         this.playersPerTeam = playersPerTeam;
         this.matchingRule = rule;
-
         Match matchToFind = null;
-
 
         if(this.matchingRule == MatchMakingRule.WinRatio) {
 
@@ -69,10 +67,10 @@ public class MatchmakerImpl implements Matchmaker {
         return matchToFind;
     }
 
-    public ArrayList<Match> findMatches(int playersPerTeam) {
+    public ArrayList<Match> findMatchesWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule) {
 
         this.playersPerTeam = playersPerTeam;
-
+        this.matchingRule = rule;
         Match matchToFind = null;
 
         if(this.matchingRule == MatchMakingRule.WinRatio) {
@@ -89,6 +87,11 @@ public class MatchmakerImpl implements Matchmaker {
         }
 
         return fullyMatchedMatches;
+    }
+
+    public ArrayList<Match> findMatches(int playersPerTeam) {
+
+        return findMatchesWithRule(playersPerTeam, MatchMakingRule.Elo);
     }
 
     public void enterMatchmaking(Player player) {

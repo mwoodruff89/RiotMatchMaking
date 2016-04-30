@@ -16,9 +16,9 @@ package com.riotgames.interview.hongkong.matchmaking;
 public class Player implements Comparable<Player>{
 
     private final String name;
-    private final long wins;
-    private final long losses;
-    private final float winRatio;
+    private long wins;
+    private long losses;
+    private float winRatio;
 
     /**
      * <p> Elo rating of the player </p>
@@ -130,6 +130,18 @@ public class Player implements Comparable<Player>{
     public void setEloRating(int newElo) {
 
         this.eloRating = newElo;
+    }
+
+    public void setWins(long newWins) {
+
+        this.wins = newWins;
+        this.winRatio = wins / (wins + losses);
+    }
+
+    public void setLosses(long newLosses) {
+
+        this.losses = newLosses;
+        this.winRatio = wins / (wins + losses);
     }
 
 

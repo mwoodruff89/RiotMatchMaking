@@ -26,15 +26,6 @@ public class Game {
      * The team that lost the match. Is null before a match is player.
      */
     private Team losingTeam = null;
-    /**
-     * Constructor for instance of a Game.
-     * @param match A match with two teams each with a set of players.
-     */
-    public Game(Match match) {
-
-        this.match = match;
-        setupProbability();;
-    }
 
     /**
      * The K factor used for how much a win / loss will affect a player's rating. The higher the K value, the more
@@ -57,6 +48,16 @@ public class Game {
     private final int kFactorLow = 10;
 
     /**
+     * Constructor for instance of a Game.
+     * @param match A match with two teams each with a set of players.
+     */
+    public Game(Match match) {
+
+        this.match = match;
+        setupProbability();;
+    }
+
+    /**
      * Init helper method. Calculates the win probability of team 1 winning (and inversely team 2 winning)
      *
      * This calculation is based from https://metinmediamath.wordpress.com/2013/11/12/sports-elo-rating-and-win-probability-carlsen-vs-anand/
@@ -65,21 +66,30 @@ public class Game {
      */
     private void setupProbability() {
 
-        double difference = Math.abs(match.getTeam1().getAverageElo() - match.getTeam2().getAverageElo());
-        double probability = 0;
-        if (difference > 0) {
-            //Team 2 more likely to win so deduct from 1. Don't minus from 1
-            probability = 1 / (1 + Math.exp(0.00583 * difference - 0.0505));
+        if(match.getMatchmaker().matchingRule == MatchmakerImpl.MatchMakingRule.Elo) {
 
+            double difference = Math.abs(match.getTeam1().getAverageElo() - match.getTeam2().getAverageElo());
+            double probability = 0;
+            if (difference > 0) {
+                //Team 2 more likely to win so deduct from 1. Don't minus from 1
+                probability = 1 / (1 + Math.exp(0.00583 * difference - 0.0505));
+
+            } else {
+                //Team 1 more likely to win
+                probability = 1 - 1 / (1 + Math.exp(0.00583 * difference - 0.0505));
+            }
+
+            this.winningProbility = probability;
         } else {
-            //Team 1 more likely to win
-            probability = 1 - 1 / (1 + Math.exp(0.00583 * difference - 0.0505));
-        }
 
-        this.winningProbility = probability;
+            double sumOfWinRating = match.getTeam1().getAverageWinRating() + match.getTeam2().getAverageWinRating();
+            this.winningProbility =  match.getTeam1().getAverageWinRating()/ sumOfWinRating;
+        }
     }
 
     public Match getMatch() { return match; }
+
+    public double getWinningProbility() { return winningProbility; }
 
     /**
      * Randomly assigns a winner of the match based on the winning percentage for each team.
@@ -88,26 +98,40 @@ public class Game {
 
         generateWinner();
 
-        double transformedRatingWinner = Math.pow(10, winningTeam.getAverageElo() / 400);
-        double transformedRatingLoser = Math.pow(10, losingTeam.getAverageElo() / 400);
+        if(match.getMatchmaker().matchingRule == MatchmakerImpl.MatchMakingRule.Elo) {
 
-        double expectedScoreWinner = transformedRatingWinner / (transformedRatingWinner + transformedRatingLoser);
-        double expectedScoreLoser = transformedRatingLoser / (transformedRatingWinner + transformedRatingLoser);
+            double transformedRatingWinner = Math.pow(10, winningTeam.getAverageElo() / 400);
+            double transformedRatingLoser = Math.pow(10, losingTeam.getAverageElo() / 400);
 
-        //Update winning player scores
-        for (Player winningPlayer : winningTeam.getPlayers()) {
+            double expectedScoreWinner = transformedRatingWinner / (transformedRatingWinner + transformedRatingLoser);
+            double expectedScoreLoser = transformedRatingLoser / (transformedRatingWinner + transformedRatingLoser);
 
-            int newElo = (int)(winningPlayer.getEloRating() + kFactorForPlayer(winningPlayer) * (1 - expectedScoreWinner));
-            //System.out.printf("\nWinning Player: Old Score: %s New Score %s", winningPlayer.getEloRating(), newElo);
-            winningPlayer.setEloRating(newElo);
-        }
+            //Update winning player scores
+            for (Player winningPlayer : winningTeam.getPlayers()) {
 
-        //Update loosing player scores
-        for(Player losingPlayer : losingTeam.getPlayers()) {
+                int newElo = (int) (winningPlayer.getEloRating() + kFactorForPlayer(winningPlayer) * (1 - expectedScoreWinner));
+                //System.out.printf("\nWinning Player: Old Score: %s New Score %s", winningPlayer.getEloRating(), newElo);
+                winningPlayer.setEloRating(newElo);
+            }
 
-            int newElo = (int)(losingPlayer.getEloRating() + kFactorForPlayer(losingPlayer) * (0 - expectedScoreLoser));
-            //System.out.printf("\nLosing Player. Old Score: %s New Score %s", losingPlayer.getEloRating(), newElo);
-            losingPlayer.setEloRating(newElo);
+            //Update loosing player scores
+            for (Player losingPlayer : losingTeam.getPlayers()) {
+
+                int newElo = (int) (losingPlayer.getEloRating() + kFactorForPlayer(losingPlayer) * (0 - expectedScoreLoser));
+                //System.out.printf("\nLosing Player. Old Score: %s New Score %s", losingPlayer.getEloRating(), newElo);
+                losingPlayer.setEloRating(newElo);
+            }
+        } else {
+
+            for (Player winningPlayer : winningTeam.getPlayers()) {
+
+                winningPlayer.setWins(winningPlayer.getWins() + 1);
+            }
+
+            for(Player losingPlayer : losingTeam.getPlayers()) {
+
+                losingPlayer.setLosses(losingPlayer.getLosses() + 1);
+            }
         }
     }
 

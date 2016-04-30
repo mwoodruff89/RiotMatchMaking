@@ -55,6 +55,8 @@ public class Match {
         updateMeanRating();
     }
 
+    public MatchmakerImpl getMatchmaker() { return matchmaker; }
+
     public Team getTeam1() { return team1; }
 
     public Team getTeam2() {
