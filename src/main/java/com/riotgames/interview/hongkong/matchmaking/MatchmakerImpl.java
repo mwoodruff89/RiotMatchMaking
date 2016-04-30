@@ -26,6 +26,7 @@ public class MatchmakerImpl implements Matchmaker {
      */
     private int playersPerTeam = 0;
 
+    private List<Player> playerList;
     /**
      * The match making rule / algorithm to be utilised. Default is Elo but can be edited to use a different rule
      */
@@ -43,13 +44,13 @@ public class MatchmakerImpl implements Matchmaker {
 
         Match matchToFind = null;
 
-        List<Player> playerList;
+
         if(this.matchingRule == MatchMakingRule.WinRatio) {
 
             playerList = SampleData.getPlayersSortedByWinRatio();
         } else {
 
-            playerList = SampleData.getPlayers();
+            playerList = SampleData.getPlayersSortedByElo();
         }
 
         //Add all players to the match making data structure
@@ -74,7 +75,13 @@ public class MatchmakerImpl implements Matchmaker {
 
         Match matchToFind = null;
 
-        List<Player> playerList = SampleData.getPlayers();
+        if(this.matchingRule == MatchMakingRule.WinRatio) {
+
+            playerList = SampleData.getPlayersSortedByWinRatio();
+        } else {
+
+            playerList = SampleData.getPlayersSortedByElo();
+        }
 
         for (Player player : playerList) {
 

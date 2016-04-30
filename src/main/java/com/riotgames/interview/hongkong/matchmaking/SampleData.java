@@ -248,7 +248,13 @@ public class SampleData {
 
     public static List<Player> getPlayersSortedByWinRatio() {
 
-        Collections.sort(SampleData.players);
+        Collections.sort(SampleData.getPlayers(), new PlayerComparatorWinRatio());
+        return SampleData.players;
+    }
+
+    public static List<Player> getPlayersSortedByElo() {
+
+        Collections.sort(SampleData.getPlayers(), new PlayerComparatorElo());
         return SampleData.players;
     }
 }
