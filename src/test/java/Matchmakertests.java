@@ -102,7 +102,7 @@ public class Matchmakertests {
         for (Player player : new HashSet<Player>(team)) {
 
             double ratingDifference = player.getWinRatio() - matchedMatch.averageWinRating;
-            assert (Math.abs(ratingDifference) < matchedMatch.kMaxDifference);
+            assert (Math.abs(ratingDifference) < matchedMatch.maxDifference);
         }
     }
 }

@@ -13,9 +13,9 @@ public class Match {
     private int maxTeamSize = 0;
 
     /**
-     * The maximum difference of the win rating between two players
+     * Customizable maximum difference of the win rating between two players
      */
-    public double kMaxDifference = 0.1;
+    public double maxDifference = 0.1;
 
     /**
      * The average win rating of the players
@@ -58,7 +58,7 @@ public class Match {
 
             //Both empty so basically starting a new match
             canAdd = true;
-        } else if(Math.abs(averageWinRating - rating) <= kMaxDifference) {
+        } else if(Math.abs(averageWinRating - rating) <= maxDifference) {
 
             //Match already has players so can only add if the rating falls within the range
             canAdd = true;
