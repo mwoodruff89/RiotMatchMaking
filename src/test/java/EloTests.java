@@ -91,19 +91,6 @@ public class EloTests {
         assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam2());
     }
 
-    @Test
-    public void testGame() {
-
-        int teamSize = 5;
-        ArrayList<Match> matchedMatches = testableMatchMaker.findMatches(5);
-
-        for (Match match : matchedMatches) {
-
-            Game newGame = new Game(match);
-            newGame.playMatch();
-        }
-    }
-
     /**
      * Given a set which represents a team of players, will assert if every player within that team is within
      * its' matches rating range
