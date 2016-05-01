@@ -13,7 +13,7 @@ package com.riotgames.interview.hongkong.matchmaking;
  * solution.
  * </p>
  */
-public class Player implements Comparable<Player>{
+public class Player {
 
     private final String name;
     private long wins;
@@ -158,17 +158,8 @@ public class Player implements Comparable<Player>{
         return this.isMatched;
     }
 
+    public String toString() {
 
-    public int compareTo(Player player) {
-
-        if(winRatio > player.getWinRatio()) {
-
-            return 1;
-        } else if(winRatio < player.getWinRatio()) {
-
-            return -1;
-        } else {
-            return 0;
-        }
+        return "\n" + this.name + " / " + this.wins + "W / " + this.losses + "L / " + this.winRatio + "WR / " + this.eloRating + "ELO";
     }
 }

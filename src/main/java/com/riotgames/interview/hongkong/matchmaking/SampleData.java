@@ -257,4 +257,41 @@ public class SampleData {
         Collections.sort(SampleData.getPlayers(), new PlayerComparatorElo());
         return SampleData.players;
     }
+
+    /**
+     * Prints the ranking on the player based on Elo Score
+     * @param topX - Specifier for printing the top 'x' players in the ladder. Negative input will print all players.
+     */
+    public static void printEloLadder(int topX) {
+
+        int rank = 1;
+        for (Player player : SampleData.getPlayersSortedByElo()) {
+
+            if(rank > topX) {
+
+                break;
+            }
+            System.out.println(rank + ". " + player);
+            rank++;
+        }
+    }
+
+    /**
+     * Prints the ladder table of the sample data players based on WR Score
+     * @param topX - Specifier for printing the top 'x' players in the ladder. Negative input will print all players.
+     */
+    public static void printWRLadder(int topX) {
+
+        int rank = 1;
+        for (Player player : SampleData.getPlayersSortedByWinRatio()) {
+
+            if(rank > topX) {
+
+                break;
+            }
+            System.out.println(rank + ". " + player);
+            rank++;
+        }
+
+    }
 }

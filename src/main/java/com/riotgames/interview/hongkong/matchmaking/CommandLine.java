@@ -97,6 +97,7 @@ public class CommandLine {
                         totalProbability += match.getGame().getWinningProbility();
                     }
                     double averageProbability = totalProbability / matchmaker.getCompletedMatches().size();
+                    SampleData.printWRLadder(5);
                     System.out.printf("AVERAGE Match Win/Lose Probability OF ALL GAMES: %s\n", averageProbability);
                 }
             }
