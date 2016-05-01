@@ -4,7 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by michaelwoodruff on 30/4/2016.
+ * A Team Class represents a set of players of a team.
+ * Each team has associated with it an average / total Elo and WR score, plus the set of players.
+ *
+ * A Team also has a size helper method to help other classes know the size and a add method to add new players to
+ * the team.
  */
 public class Team {
 
@@ -35,6 +39,7 @@ public class Team {
 
     /**
      * Constructor which creates an instance of a team based on a set of given players
+     * @param players - The set of players to construct / initiate the team with
      */
     public Team(Set<Player> players) {
 

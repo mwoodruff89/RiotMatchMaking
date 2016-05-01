@@ -71,16 +71,34 @@ public class MatchmakerImpl implements Matchmaker {
     public ArrayList<Match>getCompletedMatches() { return completedMatches; }
     public double getMaxEloDifference() { return this.maxEloDifference; }
 
+    /**
+     * Create a match based on a given amount of players per team, a match making rule and if the datasource should be sorted
+     * @param playersPerTeam - The number of players required in each tea
+     * @return - The set of created matches
+     */
     public Match findMatch(int playersPerTeam) {
 
         return findMatchWithRule(playersPerTeam, MatchMakingRule.Elo);
     }
 
+    /**
+     * Create a match based on a given amount of players per team, a match making rule and if the datasource should be sorted
+     * @param playersPerTeam - The number of players required in each tea
+     * @param rule - The matchmaking rule to be used when attempting to match players
+     * @return - The set of created matches
+     */
     public Match findMatchWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule) {
 
         return findMatchWithRuleAndIsSorted(playersPerTeam, rule, true);
     }
 
+    /**
+     * Create a match based on a given amount of players per team, a match making rule and if the datasource should be sorted
+     * @param playersPerTeam - The number of players required in each tea
+     * @param rule - The matchmaking rule to be used when attempting to match players
+     * @param isSorted - A flag to indicate if the list of players datasource should be kept sorted
+     * @return - The set of created matches
+     */
     public Match findMatchWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted) {
 
         this.playersPerTeam = playersPerTeam;
@@ -121,16 +139,34 @@ public class MatchmakerImpl implements Matchmaker {
         return matchToFind;
     }
 
+    /**
+     * Create a match based on a given amount of players per team
+     * @param playersPerTeam The number of players required in each team
+     * @return - The set of created matches
+     */
     public ArrayList<Match> findMatches(int playersPerTeam) {
 
         return findMatchesWithRule(playersPerTeam, MatchMakingRule.Elo);
     }
 
+    /**
+     * Create a match based on a given amount of players per team and a match making rule
+     * @param playersPerTeam - The number of players required in each tea
+     * @param rule - The matchmaking rule to be used when attempting to match players
+     * @return - The set of created matches
+     */
     public ArrayList<Match> findMatchesWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule) {
 
         return findMatchesWithRuleAndIsSorted(playersPerTeam, rule, true);
     }
 
+    /**
+     * Create a match based on a given amount of players per team, a match making rule and if the datasource should be sorted
+     * @param playersPerTeam - The number of players required in each tea
+     * @param rule - The matchmaking rule to be used when attempting to match players
+     * @param isSorted - A flag to indicate if the list of players datasource should be kept sorted
+     * @return - The set of created matches
+     */
     public ArrayList<Match> findMatchesWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted) {
 
         this.playersPerTeam = playersPerTeam;
@@ -166,6 +202,11 @@ public class MatchmakerImpl implements Matchmaker {
         return fullyMatchedMatches;
     }
 
+    /**
+     * Adds a player to a match from the match making lists. If the player cannot be added an existing match,
+     * they are added to a new match on themself
+     * @param player - The player to be added to a match
+     */
     public void enterMatchmaking(Player player) {
 
         //Find out if we can add the player to any of the matches currently trying to match

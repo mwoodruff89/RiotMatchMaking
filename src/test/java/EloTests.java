@@ -127,8 +127,9 @@ public class EloTests {
      * its' matches rating range
      *
      * Note: The +1 is to account to round down division when calculating average ratings
-     * @param team - The team which will be tested to see if every team member is within the maximum rating difference
-     */
+     * @param team1 - The first team in the match
+     * @param team2 - The second team in the match
+     * */
     protected void assertValidWinRatingInTeam(Team team1, Team team2) {
 
         double team1ToMatchRatingDifference = team1.getAverageWinRating() -matchedMatch.averageRating;

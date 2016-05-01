@@ -74,10 +74,10 @@ public class Match {
     /**
      * Constructor / initialiser method for the Match class. Will set the private instance variables based in the
      * input parameters.
-     * @param team1
-     * @param team2
-     * @param maxSize
-     * @param matchMaker
+     * @param team1 - The first team to be added to the match
+     * @param team2 - The second team to be added to the match
+     * @param maxSize - The maximum size for each team in the match
+     * @param matchMaker - The match maker for this match
      */
     public Match(HashSet<Player> team1, HashSet<Player> team2, int maxSize, MatchmakerImpl matchMaker) {
 

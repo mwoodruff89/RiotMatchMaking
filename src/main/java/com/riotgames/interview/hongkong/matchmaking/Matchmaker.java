@@ -34,7 +34,7 @@ public interface Matchmaker {
      * @param playersPerTeam - The number of players required in each team
      * @param rule           - The matching rule / algorithm to be applied to find matches
      * @param isSorted       - Whether the match maker will sort the player array list first before extracting players
-     * @return
+     * @return - The match which was found
      */
     Match findMatchWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted);
 
@@ -68,21 +68,22 @@ public interface Matchmaker {
      * @param playersPerTeam The number of players required in each team
      * @param rule           - The matching rule / algorithm to be applied to find matches
      * @param isSorted       - Whether the match maker will sort the player array list first before extracting players
-     * @return
+     * @return - The list of matches found
      */
     ArrayList<Match> findMatchesWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted);
 
     /**
      * <p>
-     * Add a player for matching.
+     *     Add a player for matching
      * </p>
+     * @param player - The player to be added to the match making service
      */
     void enterMatchmaking(Player player);
 
     /**
      * The match maker will process and play the game of the given match. Then it will clean up the match from the matched list and
      * move it to the completed list. Then, the match maker will release all players so they can be matched to another game.
-     * @param match
+     * @param match - The match to be played
      */
     void playMatch(Match match);
 
