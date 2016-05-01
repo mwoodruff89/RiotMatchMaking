@@ -20,7 +20,7 @@ public class CommandLine {
 
         if(args.length == 0) {
 
-            System.out.print("Please specify command line arugments. Use java CommandLine Help for more info");
+            System.out.print("Please specify command line arguments. Use java CommandLine Help for more info");
         } else {
 
             if (args[0].equals("Help")) {
