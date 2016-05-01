@@ -215,10 +215,7 @@ public class MatchmakerImpl implements Matchmaker {
 
         if(fullyMatchedMatches.contains(match)) {
 
-            System.out.println(match);
-            System.out.println(match.getGame());
             match.playMatch();
-            System.out.println(match.getGame());
             didFinishRound();
         } else {
 
