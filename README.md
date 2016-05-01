@@ -82,7 +82,7 @@ Given that you can input different arguments for the matching algorithm, amount 
 
 For example:
 
-####Example 1: 100 Matches using Elo, Sorted and 5v5 matches:
+####Example 1: 
 ```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine 100 Elo Sorted 5
 ```
@@ -94,7 +94,7 @@ Average Games in Sim: 5.1
 Max Elo Difference (initial is 20): 20.0
 ```
 
-####Example 2: 1000 matches using Elo, Non sorted, 3v3 matches:
+####Example 2: 
 ```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine 1000 Elo NonSorted 3
 ```
@@ -105,7 +105,7 @@ Average Games in Sim: 30.15
 Max Elo Difference (initial is 20): 20.0
 ```
 
-####Example 3: 100 matches using WR, sorted, 2v2 matches:
+####Example 3: 
 ```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine 100 WR Sorted 2
 ```
@@ -116,7 +116,7 @@ Average Games in Sim: 5.0
 Max Elo Difference (initial is 20): 20.0
 ```
 
-####Example 4: Single match using Elo, non sorted, 5v5:
+####Example 4: 
 ```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine Elo NonSorted 5
 ```
@@ -139,7 +139,7 @@ Team 1 Won!
 
 ```
 
-###Example 5: Single match using WR, sorted, 1v1
+###Example 5:
 ```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine WR Sorted 1
 ```
