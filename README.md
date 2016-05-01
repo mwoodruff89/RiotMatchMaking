@@ -24,12 +24,20 @@ and you will get the command line argument specifications
 ###Example commands:
 
 ####Mutli Match making
+```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine 200 Elo Sorted 5
+```
+```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine 100 WR Sorted 2
+```
 
 ####Single Match making
+```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine Elo NonSorted 5
+```
+```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine WR Sorted 3
+```
 
 If you have IntelliJ IDE you may also run the build from there and use one of the two build configurations:
 
@@ -74,7 +82,10 @@ Given that you can input different arguments for the matching algorithm, amount 
 
 For example:
 
-####Example 1: 100 Matches using Elo, Sorting and 5v5 matches:
+####Example 1: 100 Matches using Elo, Sorted and 5v5 matches:
+```
+java com.riotgames.interview.hongkong.matchmaking.CommandLine 100 Elo Sorted 5
+```
 
 ```
 AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.49802739033867716
@@ -85,6 +96,9 @@ Max Elo Difference (initial is 20): 20.0
 
 ####Example 2: 1000 matches using Elo, Non sorted, 3v3 matches:
 ```
+java com.riotgames.interview.hongkong.matchmaking.CommandLine 1000 Elo NonSorted 3
+```
+```
 AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.5009482015464723
 Average Waiting Time: 25.85
 Average Games in Sim: 30.15
@@ -93,6 +107,9 @@ Max Elo Difference (initial is 20): 20.0
 
 ####Example 3: 100 matches using WR, sorted, 2v2 matches:
 ```
+java com.riotgames.interview.hongkong.matchmaking.CommandLine 100 WR Sorted 2
+```
+```
 AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.5402696246079739
 Average Waiting Time: 0.0
 Average Games in Sim: 5.0
@@ -100,6 +117,9 @@ Max Elo Difference (initial is 20): 20.0
 ```
 
 ####Example 4: Single match using Elo, non sorted, 5v5:
+```
+java com.riotgames.interview.hongkong.matchmaking.CommandLine Elo NonSorted 5
+```
 ```
 *-- Match ---*
 Team Size: 5
@@ -120,6 +140,9 @@ Team 1 Won!
 ```
 
 ###Example 5: Single match using WR, sorted, 1v1
+```
+java com.riotgames.interview.hongkong.matchmaking.CommandLine WR Sorted 1
+```
 ```
 *-- Match ---*
 Team Size: 1
