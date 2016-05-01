@@ -60,16 +60,21 @@ The most interesting part!
 This program automatically logs details of every match and also the result of every match, so you can scroll through the logs if you wish and view the winning probability for each team and also their average Elo / Win rating score.
 
 The last items printed on the log (when doing multi matching) will tell you the following:
+
 1. The average match win/lose probability
+
 2. The average waiting time of all players
+
 3. The average amount of games played by all player (in this simulation)
+
 4. The final max elo difference (see below on how my Elo algorithm works to know what this means)
+
 
 Given that you can input different arguments for the matching algorithm, amount of matches, sorting and team sizes, I think you can play around quite a lot to see the different results different combinations give you.
 
 For example:
 
-Example 1: 100 Matches using Elo, Sorting and 5v5 matches:
+####Example 1: 100 Matches using Elo, Sorting and 5v5 matches:
 
 ```
 AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.49802739033867716
@@ -78,7 +83,7 @@ Average Games in Sim: 5.1
 Max Elo Difference (initial is 20): 20.0
 ```
 
-Example 2: 1000 matches using Elo, Non sorted, 3v3 matches:
+####Example 2: 1000 matches using Elo, Non sorted, 3v3 matches:
 ```
 AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.5009482015464723
 Average Waiting Time: 25.85
@@ -86,7 +91,7 @@ Average Games in Sim: 30.15
 Max Elo Difference (initial is 20): 20.0
 ```
 
-Example 3: 100 matches using WR, sorted, 2v2 matches:
+####Example 3: 100 matches using WR, sorted, 2v2 matches:
 ```
 AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.5402696246079739
 Average Waiting Time: 0.0
@@ -94,7 +99,7 @@ Average Games in Sim: 5.0
 Max Elo Difference (initial is 20): 20.0
 ```
 
-Example 4: Single match using Elo, non sorted, 5v5:
+####Example 4: Single match using Elo, non sorted, 5v5:
 ```
 *-- Match ---*
 Team Size: 5
@@ -114,7 +119,7 @@ Team 1 Won!
 
 ```
 
-Example 5: Single match using WR, sorted, 1v1
+###Example 5: Single match using WR, sorted, 1v1
 ```
 *-- Match ---*
 Team Size: 1
@@ -132,3 +137,11 @@ Probabilty of Team 1 Winning: 0.5439669705211574
 Probability of Team 2 Winning: 0.4560330294788426
 Team 1 Won!
 ```
+
+##Elo Algorithm - Description
+
+The forulae I used to award (or deduct) Elo points is taken from the online wikipedia article on Elo (with some cross-referencing from other sources).
+
+To start with, if you run a multi-match match making service, then the system will attempt to match players together where their Elo Rating is within 20 points. However, after some games are played and the player's Elo rating increases / decreases, the range of the player's ELO increases, making it more difficult to find matches with a range of 200. Therefore, if the program cannot find any matches, it will iteratively increase the range by 20 until it can start making matches again.
+
+This typically shouldn't happen in a larger match making system. However, considering our pool has only 200 people and the total min/max range of Elo can be ~ 500 >= ~1500, this is necessary in order for the program to continue making matches. The drawback of this approach is because the Elo difference is greater, the winning probability of each team also becomes more unfair.  
