@@ -70,45 +70,34 @@ public class CommandLine {
                     matchSize = Integer.parseInt(args[3]);
                 }
 
-                Matchmaker matchmaker = new MatchmakerImpl();
+                MatchmakerImpl matchmaker = new MatchmakerImpl();
 
                 if(args[0].equals("Single")) {
 
                     Match match = matchmaker.findMatchWithRuleAndIsSorted(matchSize, rule, isSorted);
                     System.out.println(match);
-                    Game game = new Game(match);
-                    System.out.println(game);
-                    game.playMatch();;
-                    System.out.println(game);
+                    System.out.println(match.getGame());
+                    match.playMatch();
+                    System.out.println(match.getGame());
                 } else {
 
-                    ArrayList<Match> matches = matchmaker.findMatchesWithRuleAndIsSorted(matchSize, rule, isSorted);
-                    System.out.printf("TOTAL MATCHES: %s\n", matches.size());
+                    int playedMatches = 0;
+
+                    while (playedMatches < 200) {
+
+                        matchmaker.findMatchesWithRuleAndIsSorted(matchSize, rule, isSorted);
+                        matchmaker.playMatches();
+                        playedMatches = matchmaker.getCompletedMatches().size();
+                    }
+
+                    //Calculate stats
                     double totalProbability = 0;
-                    double totalPlayers = 0;
-                    for (Match match : matches) {
+                    for (Match match : matchmaker.getCompletedMatches()) {
 
-                        System.out.println(match);
-                        Game game = new Game(match);
-
-                        totalProbability += game.getWinningProbility();
-                        totalPlayers += (match.getTeam1().teamSize()) + (match.getTeam2().teamSize());
-                        System.out.println(game);
-                        game.playMatch();
-                        System.out.println(game);
+                        totalProbability += match.getGame().getWinningProbility();
                     }
-
-                    for (Match match : new ArrayList<Match>(matches)) {
-
-                        matches.remove(match);
-                    }
-
-                    ArrayList<Match> secondMatches= matchmaker.findMatchesWithRuleAndIsSorted(matchSize, rule, isSorted);
-
-                    totalProbability = totalProbability / matches.size();
-                    totalPlayers = totalPlayers / SampleData.getPlayers().size();
-                    System.out.printf("AVERAGE Match Win/Lose Probability OF ALL GAMES: %s\n", totalProbability);
-                    System.out.printf("%s of all players matched", totalPlayers);
+                    double averageProbability = totalProbability / matchmaker.getCompletedMatches().size();
+                    System.out.printf("AVERAGE Match Win/Lose Probability OF ALL GAMES: %s\n", averageProbability);
                 }
             }
         }

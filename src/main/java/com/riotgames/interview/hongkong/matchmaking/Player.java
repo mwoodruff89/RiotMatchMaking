@@ -18,7 +18,7 @@ public class Player implements Comparable<Player>{
     private final String name;
     private long wins;
     private long losses;
-    private float winRatio;
+    private double winRatio;
 
     /**
      * <p> Elo rating of the player </p>
@@ -64,6 +64,8 @@ public class Player implements Comparable<Player>{
      * The base Elo Rating for new players.
      */
     private int kBaseElo = 1000;
+
+    private Boolean isMatched = false;
 
     public Player(String name, long wins, long losses) {
 
@@ -135,13 +137,25 @@ public class Player implements Comparable<Player>{
     public void setWins(long newWins) {
 
         this.wins = newWins;
-        this.winRatio = wins / (wins + losses);
+        double totalGames = this.wins + this.losses;
+        this.winRatio = this.wins / totalGames;
     }
 
     public void setLosses(long newLosses) {
 
         this.losses = newLosses;
-        this.winRatio = wins / (wins + losses);
+        double totalGames = this.wins + this.losses;
+        this.winRatio = this.wins / totalGames;
+    }
+
+    public void setIsMatched(Boolean isMatched) {
+
+        this.isMatched = isMatched;
+    }
+
+    public Boolean getIsMatched() {
+
+        return this.isMatched;
     }
 
 

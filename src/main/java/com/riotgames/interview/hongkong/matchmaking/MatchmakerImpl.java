@@ -22,6 +22,8 @@ public class MatchmakerImpl implements Matchmaker {
      */
     private final ArrayList<Match> fullyMatchedMatches = new ArrayList<Match>();
 
+    private ArrayList<Match> completedMatches = new ArrayList<Match>();
+
     /**
      * The maximum amount of players per team for this MatchmakerImpl instance
      */
@@ -32,6 +34,10 @@ public class MatchmakerImpl implements Matchmaker {
      * The match making rule / algorithm to be utilised. Default is Elo but can be edited to use a different rule
      */
     public MatchmakerImpl.MatchMakingRule matchingRule;
+
+    public ArrayList<Match>getFullyMatchedMatches() { return fullyMatchedMatches; }
+
+    public ArrayList<Match>getCompletedMatches() { return completedMatches; }
 
     public Match findMatch(int playersPerTeam) {
 
@@ -66,13 +72,17 @@ public class MatchmakerImpl implements Matchmaker {
         //Add all players to the match making data structure
         for (Player player : playerList) {
 
-            enterMatchmaking(player);
-            if(!fullyMatchedMatches.isEmpty()) {
+            if(!player.getIsMatched()) {
 
-                //Note: break and return here as this function returns a Single match. Therefore just return the first
-                //found match
-                matchToFind = fullyMatchedMatches.get(0);
-                break;
+                enterMatchmaking(player);
+                player.setIsMatched(true);
+                if (!fullyMatchedMatches.isEmpty()) {
+
+                    //Note: break and return here as this function returns a Single match. Therefore just return the first
+                    //found match
+                    matchToFind = fullyMatchedMatches.get(0);
+                    break;
+                }
             }
         }
 
@@ -110,7 +120,11 @@ public class MatchmakerImpl implements Matchmaker {
 
         for (Player player : playerList) {
 
-            enterMatchmaking(player);
+            if(!player.getIsMatched()) {
+
+                enterMatchmaking(player);
+                player.setIsMatched(true);
+            }
         }
 
         return fullyMatchedMatches;
@@ -149,5 +163,37 @@ public class MatchmakerImpl implements Matchmaker {
         newTeam.add(player);
         Match newMatch = new Match(newTeam, new HashSet<Player>(), playersPerTeam, this);
         matchingMatches.add(newMatch);
+    }
+
+    public void playMatches() {
+
+        for (Match match : fullyMatchedMatches) {
+
+            System.out.println(match);
+            System.out.println(match.getGame());
+            match.playMatch();
+            System.out.println(match.getGame());
+        }
+
+        didFinishRound();
+    }
+
+    private void didFinishRound() {
+
+        for(Match completedMatch : new ArrayList<Match>(fullyMatchedMatches)) {
+
+            for(Player team1Player : completedMatch.getTeam1().getPlayers()) {
+
+                team1Player.setIsMatched(false);
+            }
+
+            for(Player team2Player : completedMatch.getTeam2().getPlayers()) {
+
+                team2Player.setIsMatched(false);
+            }
+
+            fullyMatchedMatches.remove(completedMatch);
+            completedMatches.add(completedMatch);
+        }
     }
 }

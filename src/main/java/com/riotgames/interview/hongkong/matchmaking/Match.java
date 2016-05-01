@@ -35,6 +35,21 @@ public class Match {
      */
     private MatchmakerImpl matchmaker;
 
+    /**
+     * The game that is played between the two teams. Is null until the match is fully matched.
+     */
+    private Game game = null;
+
+    public MatchmakerImpl getMatchmaker() { return matchmaker; }
+
+    public Team getTeam1() { return team1; }
+
+    public Team getTeam2() {
+        return team2;
+    }
+
+    public Game getGame() { return game; }
+
     public Match(HashSet<Player> team1, HashSet<Player> team2, int maxSize, MatchmakerImpl matchMaker) {
 
         this.team1 = new Team(team1);
@@ -53,14 +68,6 @@ public class Match {
         }
 
         updateMeanRating();
-    }
-
-    public MatchmakerImpl getMatchmaker() { return matchmaker; }
-
-    public Team getTeam1() { return team1; }
-
-    public Team getTeam2() {
-        return team2;
     }
 
     /**
@@ -115,11 +122,16 @@ public class Match {
         if(team1.teamSize() == maxTeamSize && team2.teamSize() == maxTeamSize) {
 
             isFullyMatched = true;
+            game = new Game(this);
         }
 
         updateMeanRating();
     }
 
+    public void playMatch() {
+
+        game.playMatch();
+    }
     /**
      * Helper method which updates the mean / average rating of this match. Should be called after a player is added
      * to the match.
