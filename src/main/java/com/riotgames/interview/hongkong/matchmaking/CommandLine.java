@@ -9,6 +9,9 @@ import java.util.ArrayList;
  */
 public class CommandLine {
 
+    static final int kSingleMatchupArgCount = 3;
+    static final int kMultiMatchupArgCount = 4;
+
     public static void main(String [] args) {
 
         if(args.length == 0) {
@@ -20,118 +23,96 @@ public class CommandLine {
 
                 System.out.println("Commands To Help You: ");
                 System.out.println("java CommandLine Help ");
-                System.out.println("java CommandLine <Match-Type> <Matching-Alg> <Sorting-Alg>");
-                System.out.println("java CommandLine <Match-Type> <Matching-Alg> <Sorting-Alg> <Team-Size>");
+                System.out.println("java CommandLine <Matching-Alg> <Sorting-Alg> <Team-Size> - Single Matchup");
+                System.out.println("java CommandLine <Number-of-Matches> <Matching-Alg> <Sorting-Rule> <Team-Size> - Multiple Matchup Simulation");
                 System.out.println("java CommandLine Simulator");
                 System.out.println("Arguments:");
+                System.out.println("<Number-of-Matches> = [ >= 1]");
                 System.out.println("<Match-Type> = [Single | Multiple]");
                 System.out.println("<Matching-Alg> = [Elo | WR]");
-                System.out.println("<Sorting-Alg> = [NonSorted | Sorted]");
-                System.out.println("<TeamSize> > 0>");
-            } else if (args[0].equals("Single") || args[0].equals("Multiple")) {
+                System.out.println("<Sorting-Rule> = [NonSorted | Sorted]");
+                System.out.println("<Team-Size> = [ >=1 ]");
+            } else {
 
-                MatchmakerImpl.MatchMakingRule rule;
-                if(args.length >= 2) {
+                if (args.length == kSingleMatchupArgCount) {
+                    //Single Matchup
+                    MatchmakerImpl.MatchMakingRule rule = ruleWithArg(args[0]);
+                    if(rule == null) {
 
-                    if(args[1].equals("Elo")) {
-
-                        rule = MatchmakerImpl.MatchMakingRule.Elo;
-                    } else if (args[1].equals("WR")) {
-
-                        rule = MatchmakerImpl.MatchMakingRule.WinRatio;
-                    } else {
-
-                        System.out.println("Invalid Matching Algorithm");
                         return;
                     }
-                } else {
-                    //Default Rule is Elo
-                    rule = MatchmakerImpl.MatchMakingRule.Elo;
-                }
 
-                Boolean isSorted = false;
-                if(args.length >= 3) {
+                    Boolean isSorted = isSortedWithArg(args[1]);
+                    if(isSorted == null) {
 
-                    if(args[2].equals("Sorted")) {
-
-                        isSorted = true;
-                    } else if(!args[2].equals("NonSorted")) {
-
-                        System.out.println("Invalid Sorting Algorithm");
+                        return;
                     }
-                } else {
 
-                    isSorted = true;
-                }
-                //Optional Match Size
-                int matchSize = 5;
-                if(args.length >= 4) {
+                    int numberOfPlayers = Integer.parseInt(args[2]);
 
-                    matchSize = Integer.parseInt(args[3]);
-                }
+                    MatchMakerRunner.runSingleMatchMaker(numberOfPlayers, rule, isSorted, true);
 
-                MatchmakerImpl matchmaker = new MatchmakerImpl();
+                } else if (args.length == kMultiMatchupArgCount) {
+                    //Multiple Matchup
+                    int numberOfMatches = Integer.parseInt(args[0]);
 
-                if(args[0].equals("Single")) {
+                    MatchmakerImpl.MatchMakingRule rule = ruleWithArg(args[1]);
+                    if(rule == null) {
 
-                    Match match = matchmaker.findMatchWithRuleAndIsSorted(matchSize, rule, isSorted);
-                    System.out.println(match);
-                    System.out.println(match.getGame());
-                    match.playMatch();
-                    System.out.println(match.getGame());
+                        return;
+                    }
+
+                    Boolean isSorted = isSortedWithArg(args[2]);
+                    if(isSorted == null) {
+
+                        return;
+                    }
+
+                    int numberOfPlayers = Integer.parseInt(args[3]);
+
+                    MatchMakerRunner.runMatchMaker(numberOfMatches, numberOfPlayers, rule, isSorted, true);
+
+
                 } else {
 
-                    int playedMatches = 0;
-
-                    while (playedMatches < 1000) {
-
-                        matchmaker.findMatchesWithRuleAndIsSorted(matchSize, rule, isSorted);
-                        matchmaker.playMatches();
-                        playedMatches = matchmaker.getCompletedMatches().size();
-                        System.out.printf("Played matches: %s\n", playedMatches);
-                    }
-
-                    //Calculate stats
-                    if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.Elo) {
-
-                        SampleData.printEloLadder(5);
-                    } else {
-
-                        SampleData.printWRLadder(5);
-                    }
-
-                    double totalProbability = 0;
-                    for (Match match : matchmaker.getCompletedMatches()) {
-
-                        totalProbability += match.getGame().getWinningProbility();
-                    }
-                    double averageProbability = totalProbability / matchmaker.getCompletedMatches().size();
-                    System.out.printf("\nAVERAGE Match Win/Lose Probability OF ALL GAMES: %s\n", averageProbability);
-
-                    //Calculate average waiting times
-                    double totalWaitingTime = 0;
-                    double totalGamesInSim = 0;
-                    if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.Elo) {
-                        for (Player player : SampleData.getPlayersSortedByElo()) {
-
-                            totalWaitingTime += player.getTotalTimeWaiting();
-                            totalGamesInSim += player.getGamesPlayedInSim();
-                        }
-                    } else {
-                        for (Player player : SampleData.getPlayersSortedByWinRatio()) {
-
-                            totalWaitingTime += player.getTotalTimeWaiting();
-                            totalGamesInSim += player.getGamesPlayedInSim();
-                        }
-                    }
-
-                    double averageWaitingTime = totalWaitingTime / SampleData.getPlayers().size();
-                    System.out.printf("Average Waiting Time: %s", averageWaitingTime);
-                    double averageGamesInSim = totalGamesInSim / SampleData.getPlayers().size();
-                    System.out.printf("\nAverage Games in Sim: %s", averageGamesInSim);
-                    System.out.println("\nMax Elo Difference (initial is 20): " + matchmaker.getMaxEloDifference());
+                    System.out.println("Invalid command. Please use help to view command list");
                 }
             }
         }
+    }
+
+    private static MatchmakerImpl.MatchMakingRule ruleWithArg(String arg) {
+
+        MatchmakerImpl.MatchMakingRule rule = null;
+
+        if (arg.equals("Elo")) {
+
+            rule = MatchmakerImpl.MatchMakingRule.Elo;
+        } else if (arg.equals("WR")) {
+
+            rule = MatchmakerImpl.MatchMakingRule.WinRatio;
+        } else {
+
+            System.out.println("Invalid Matching Algorithm. Please try again and use 'Elo' or 'WR' as the first argument");
+        }
+
+        return rule;
+    }
+
+    private static Boolean isSortedWithArg(String arg) {
+
+        Boolean isSorted = null;
+        if (arg.equals("NonSorted")) {
+
+            isSorted = false;
+        } else if (arg.equals("Sorted")) {
+
+            isSorted = true;
+        } else {
+
+            System.out.println("Invalid sorting rule. Please try again and enter 'NonSorted' or 'Sorted' as the second argument");
+        }
+
+        return isSorted;
     }
 }
