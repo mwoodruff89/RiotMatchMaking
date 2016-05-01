@@ -1,5 +1,50 @@
+
+
 # RiotMatchMaking
 Assignment by Michael Woodruff for Riot Games
+
+Hi Riot! Please read my description below of how I have delivered to the assignments specifications. I have also detailed
+how to use the program from the command line and also provided some descriptions of the algorithms I used.
+
+Thanks! Mike
+
+As per the assignments description this program should:
+
+1. Allow players of different skill levels to play the game and match them in a fair way
+
+This is achieved by ranking players via either Win Ratio scoring, or Elo scoring.
+
+2. Matchmaking System to get smarted and accurately match players on teams
+
+This is achieved via the Elo match making algorithm. After each matchup, points are awarded or deducted 
+depending on how 'difficult' the game was. More points are achieved for a 'difficult' win (and less for an easy one). 
+More points are lost for games players 'should' win but lose. Less points are lost for game players where the matchup is more 'equal'
+
+3. Repeatedly draw a set number of players from a larger pool and match them into teams
+
+Depending on the arguments you give, you may specify that the program plays for example 1000 matches.
+
+In this scenario, the program will draw players from the pool, match them into smaller groups (the matches / games).
+
+Then, the program will assign / deduct points and then make the players 'available' to draw again. This process is
+done repeatedly and therefore is 'repeteadly drawing a set number of players from a larger pool'
+
+4. Your system should create balanced 3v3, 5v5 etc teams
+
+The unit tests demonstrate that the program can pick and create matches for 1v1 -> 5v5 matches.
+
+Also, you may input into the command line and test teams where each team may have >5 team members
+
+5. Ideally, we want a flexible system that'll allow us to edit the matchmaking rules and test different strategies
+
+Via the command line you may change the match making algorithm between Win ratio and Elo. You may also choose if the player's list (pool) is kept
+sorted or not and also easily change the amount of players in each team. Also you may specify how many games the simulator runs
+
+6. Your solution should be 'production-ready'
+
+Code is fully documented with an extensive readme and a compiled JavaDoc which you may read.
+
+Additionally, unit tests have been written to cover the algorithms, match maker and player classes.
 
 ##BUILD INSTRUCTIONS
 
