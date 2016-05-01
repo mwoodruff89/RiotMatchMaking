@@ -8,7 +8,8 @@ public class Match {
     private Team team2;
 
     private double kMaxDifferenceElo = 20;
-    private double kMaxDifferencWinRatio = 0.1;
+    private double maxDifferencWinRatio = 0.1;
+
     /**
      * The maximum size for each team in this match. i.e. if it's 5 then it's a 5v5 match etc.
      */
@@ -50,6 +51,11 @@ public class Match {
 
     public Game getGame() { return game; }
 
+    public void setkMaxDifferenceElo(double newDifference) {
+
+        this.kMaxDifferenceElo = newDifference;
+    }
+
     public Match(HashSet<Player> team1, HashSet<Player> team2, int maxSize, MatchmakerImpl matchMaker) {
 
         this.team1 = new Team(team1);
@@ -60,11 +66,8 @@ public class Match {
 
         if(this.matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
 
-            maxDifference = kMaxDifferencWinRatio;
+            maxDifference = maxDifferencWinRatio;
 
-        } else {
-
-            maxDifference = kMaxDifferenceElo;
         }
 
         updateMeanRating();
@@ -72,10 +75,10 @@ public class Match {
 
     /**
      *
-     * @param rating - The rating of the player assumed to be added
+     * @param player - The Player who may be added
      * @return - True if the player can be added, otherwise false
      */
-    public boolean canAddWithRating(double rating) {
+    public boolean canAddPlayer(Player player) {
 
         boolean canAdd = false;
 
@@ -88,13 +91,21 @@ public class Match {
             //Match already has players so can only add if the rating falls within the range
             if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
 
-                if(Math.abs(averageRating - rating) <= maxDifference) {
+                //If the player has been waiting some time, increase the max Difference by 0.05 * timeWaiting
+                //i.e. TW = 0, offset =0.1; TW = 1, offset = 0.15; TW = 2, offset = 0.2; TW = 3, offset = 0.25 etc
+                double offset = player.getTimeWaiting() > 0 ? maxDifference + (0.05 * player.getTimeWaiting()) : 0;
+
+                if(Math.abs(averageRating - player.getWinRatio()) <= maxDifference + offset) {
 
                     canAdd = true;
                 }
             } else {
 
-                if(Math.abs(averageRating - rating) <= maxDifference) {
+                //For every round the player has been waiting, increase the max difference by 20.
+                //ie.e TW = 0, offset = 20; TW = 1, offset = 25; TW = 2, offset = 30; TW = 3, offset = 35 etc
+                double offset = player.getTimeWaiting() > 0 ? maxDifference + (20 * player.getTimeWaiting()) : 0;
+
+                if(Math.abs(averageRating - player.getEloRating()) <= maxDifference + offset) {
 
                     canAdd = true;
                 }

@@ -65,7 +65,28 @@ public class Player {
      */
     private int kBaseElo = 1000;
 
+    /**
+     * Flag to indicate whether a player has been matched into a game or not
+     */
     private Boolean isMatched = false;
+
+    /**
+     * The amount of time the player has been CURRENTLY waiting for a match. The greater amount of time they have been waiting,
+     * the more 'flexibile' the system is in terms of matching them.
+     * WARNING: This allows better user experience (not waiting too long for a match), but may decrease how even a match is
+     */
+    private int timeWaiting = 0;
+
+    /**
+     * The amount of time the player has waited for an entire simulation / match making queue. Mainly for statistica purposes.
+     * Note: 'time' is measured in 'number of rounds' i.e. where a unit of time = 2, means that the player has been waiting 2 rounds.
+     */
+    private int totalTimeWaiting = 0;
+
+    /**
+     * The amount of games the player has played in this simulator. For statistical purposes
+     */
+    private int gamesPlayedInSim = 0;
 
     public Player(String name, long wins, long losses) {
 
@@ -156,6 +177,43 @@ public class Player {
     public Boolean getIsMatched() {
 
         return this.isMatched;
+    }
+
+    public int getTimeWaiting() {
+
+        return this.timeWaiting;
+    }
+
+    /**
+     * Update the time waiting by one (probably because the player didn't get a game in this round)
+     */
+    public void updateTimeWaiting() {
+
+        this.timeWaiting += 1;
+        this.totalTimeWaiting += 1;
+    }
+
+    /**
+     * Reset the time waiting back to zero. Most likely means the player just got matched and played a game.
+     */
+    public void resetTimeWaiting() {
+
+        this.timeWaiting = 0;
+    }
+
+    public int getTotalTimeWaiting() {
+
+        return this.totalTimeWaiting;
+    }
+
+    public void updateGamesPlayedInSim() {
+
+        gamesPlayedInSim += 1;
+    }
+
+    public int getGamesPlayedInSim() {
+
+        return this.gamesPlayedInSim;
     }
 
     public String toString() {

@@ -292,6 +292,5 @@ public class SampleData {
             System.out.println(rank + ". " + player);
             rank++;
         }
-
     }
 }

@@ -25,7 +25,7 @@ public class CommandLine {
                 System.out.println("java CommandLine Simulator");
                 System.out.println("Arguments:");
                 System.out.println("<Match-Type> = [Single | Multiple]");
-                System.out.println("<Matching-Alg> = [Elo | WinRating]");
+                System.out.println("<Matching-Alg> = [Elo | WR]");
                 System.out.println("<Sorting-Alg> = [NonSorted | Sorted]");
                 System.out.println("<TeamSize> > 0>");
             } else if (args[0].equals("Single") || args[0].equals("Multiple")) {
@@ -36,7 +36,7 @@ public class CommandLine {
                     if(args[1].equals("Elo")) {
 
                         rule = MatchmakerImpl.MatchMakingRule.Elo;
-                    } else if (args[1].equals("WinRating")) {
+                    } else if (args[1].equals("WR")) {
 
                         rule = MatchmakerImpl.MatchMakingRule.WinRatio;
                     } else {
@@ -83,22 +83,53 @@ public class CommandLine {
 
                     int playedMatches = 0;
 
-                    while (playedMatches < 200) {
+                    while (playedMatches < 1000) {
 
                         matchmaker.findMatchesWithRuleAndIsSorted(matchSize, rule, isSorted);
                         matchmaker.playMatches();
                         playedMatches = matchmaker.getCompletedMatches().size();
+                        System.out.printf("Played matches: %s\n", playedMatches);
                     }
 
                     //Calculate stats
+                    if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.Elo) {
+
+                        SampleData.printEloLadder(5);
+                    } else {
+
+                        SampleData.printWRLadder(5);
+                    }
+
                     double totalProbability = 0;
                     for (Match match : matchmaker.getCompletedMatches()) {
 
                         totalProbability += match.getGame().getWinningProbility();
                     }
                     double averageProbability = totalProbability / matchmaker.getCompletedMatches().size();
-                    SampleData.printWRLadder(5);
-                    System.out.printf("AVERAGE Match Win/Lose Probability OF ALL GAMES: %s\n", averageProbability);
+                    System.out.printf("\nAVERAGE Match Win/Lose Probability OF ALL GAMES: %s\n", averageProbability);
+
+                    //Calculate average waiting times
+                    double totalWaitingTime = 0;
+                    double totalGamesInSim = 0;
+                    if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.Elo) {
+                        for (Player player : SampleData.getPlayersSortedByElo()) {
+
+                            totalWaitingTime += player.getTotalTimeWaiting();
+                            totalGamesInSim += player.getGamesPlayedInSim();
+                        }
+                    } else {
+                        for (Player player : SampleData.getPlayersSortedByWinRatio()) {
+
+                            totalWaitingTime += player.getTotalTimeWaiting();
+                            totalGamesInSim += player.getGamesPlayedInSim();
+                        }
+                    }
+
+                    double averageWaitingTime = totalWaitingTime / SampleData.getPlayers().size();
+                    System.out.printf("Average Waiting Time: %s", averageWaitingTime);
+                    double averageGamesInSim = totalGamesInSim / SampleData.getPlayers().size();
+                    System.out.printf("\nAverage Games in Sim: %s", averageGamesInSim);
+                    System.out.println("\nMax Elo Difference (initial is 20): " + matchmaker.getMaxEloDifference());
                 }
             }
         }
