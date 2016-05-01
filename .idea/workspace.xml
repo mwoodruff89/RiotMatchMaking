@@ -7,56 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36fcb919-f3fc-48e2-ba21-a5f709850524" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/TestSuite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/riotgames/interview/hongkong/matchmaking/MatchmakerImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/riotgames/interview/hongkong/matchmaking/MatchmakerImpl.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/riotgames/interview/hongkong/matchmaking/Team.class" afterPath="$PROJECT_DIR$/target/classes/com/riotgames/interview/hongkong/matchmaking/Team.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/EloTests.class" afterPath="$PROJECT_DIR$/target/test-classes/EloTests.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/EloTests.html" afterPath="$PROJECT_DIR$/doc/EloTests.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/MatchMakerTests.html" afterPath="$PROJECT_DIR$/doc/MatchMakerTests.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/WinRatioTests.html" afterPath="$PROJECT_DIR$/doc/WinRatioTests.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/allclasses-frame.html" afterPath="$PROJECT_DIR$/doc/allclasses-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/allclasses-noframe.html" afterPath="$PROJECT_DIR$/doc/allclasses-noframe.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/CommandLine.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/CommandLine.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Game.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Game.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Match.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Match.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/MatchMakerRunner.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/MatchMakerRunner.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Matchmaker.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Matchmaker.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/MatchmakerImpl.MatchMakingRule.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/MatchmakerImpl.MatchMakingRule.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/MatchmakerImpl.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/MatchmakerImpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Player.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Player.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/PlayerComparatorElo.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/PlayerComparatorElo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/PlayerComparatorWinRatio.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/PlayerComparatorWinRatio.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/SampleData.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/SampleData.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Team.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/Team.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/package-frame.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/package-summary.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/package-tree.html" afterPath="$PROJECT_DIR$/doc/com/riotgames/interview/hongkong/matchmaking/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/constant-values.html" afterPath="$PROJECT_DIR$/doc/constant-values.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/deprecated-list.html" afterPath="$PROJECT_DIR$/doc/deprecated-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/help-doc.html" afterPath="$PROJECT_DIR$/doc/help-doc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-1.html" afterPath="$PROJECT_DIR$/doc/index-files/index-1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-10.html" afterPath="$PROJECT_DIR$/doc/index-files/index-10.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-11.html" afterPath="$PROJECT_DIR$/doc/index-files/index-11.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-12.html" afterPath="$PROJECT_DIR$/doc/index-files/index-12.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-13.html" afterPath="$PROJECT_DIR$/doc/index-files/index-13.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-14.html" afterPath="$PROJECT_DIR$/doc/index-files/index-14.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-2.html" afterPath="$PROJECT_DIR$/doc/index-files/index-2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-3.html" afterPath="$PROJECT_DIR$/doc/index-files/index-3.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-4.html" afterPath="$PROJECT_DIR$/doc/index-files/index-4.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-5.html" afterPath="$PROJECT_DIR$/doc/index-files/index-5.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-6.html" afterPath="$PROJECT_DIR$/doc/index-files/index-6.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-7.html" afterPath="$PROJECT_DIR$/doc/index-files/index-7.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-8.html" afterPath="$PROJECT_DIR$/doc/index-files/index-8.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index-files/index-9.html" afterPath="$PROJECT_DIR$/doc/index-files/index-9.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/index.html" afterPath="$PROJECT_DIR$/doc/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/overview-frame.html" afterPath="$PROJECT_DIR$/doc/overview-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/overview-summary.html" afterPath="$PROJECT_DIR$/doc/overview-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/overview-tree.html" afterPath="$PROJECT_DIR$/doc/overview-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/package-frame.html" afterPath="$PROJECT_DIR$/doc/package-frame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/package-summary.html" afterPath="$PROJECT_DIR$/doc/package-summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/package-tree.html" afterPath="$PROJECT_DIR$/doc/package-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Match.java" afterPath="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Match.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Matchmaker.java" afterPath="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Matchmaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/MatchmakerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/MatchmakerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Team.java" afterPath="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Team.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/EloTests.java" afterPath="$PROJECT_DIR$/src/test/java/EloTests.java" />
     </list>
     <ignored path="hongkong.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -98,7 +53,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Matchmaker.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Matchmaker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Matchmaker.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="207">
@@ -158,26 +113,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MatchTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/MatchTests.java">
+      <file leaf-file-name="PlayerTests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/PlayerTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="21" selection-end-column="5" />
+            <state relative-caret-position="288">
+              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3596#3604#0" expanded="true" />
-                <element signature="e#3791#3799#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/PlayerTests.java">
+      <file leaf-file-name="TestSuite.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/TestSuite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
+                <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -221,6 +175,7 @@
         <option value="$PROJECT_DIR$/src/test/java/EloTests.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Match.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Matchmaker.java" />
+        <option value="$PROJECT_DIR$/src/test/java/TestSuite.java" />
       </list>
     </option>
   </component>
@@ -232,8 +187,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="15" />
-    <option name="y" value="37" />
+    <option name="x" value="14" />
+    <option name="y" value="24" />
     <option name="width" value="1260" />
     <option name="height" value="674" />
   </component>
@@ -415,7 +370,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="JUnit.All Tests">
+  <component name="RunManager" selected="JUnit.TestSuite">
     <configuration default="false" name="CommandLine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -434,6 +389,27 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="hongkong" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="TestSuite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="hongkong" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSuite" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -692,13 +668,15 @@
       <patterns />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Application.CommandLine" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.All Tests" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TestSuite" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.CommandLine" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.TestSuite" />
+        <item index="1" class="java.lang.String" itemvalue="Application.CommandLine" />
       </list>
     </recent_temporary>
   </component>
@@ -719,9 +697,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_Tests - 2016.05.01 at 22h 09m 42s.xml">
-      <configuration name="All Tests" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_Tests - 2016.05.01 at 22h 10m 01s.xml">
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
@@ -749,9 +724,12 @@
     <history-entry file="All_Tests - 2016.05.01 at 22h 32m 14s.xml">
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestSuite - 2016.05.01 at 23h 14m 33s.xml">
+      <configuration name="TestSuite" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="15" y="37" width="1260" height="674" extended-state="0" />
+    <frame x="14" y="24" width="1260" height="674" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -802,14 +780,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1365">
@@ -1160,16 +1130,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/PlayerTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/riotgames/interview/hongkong/matchmaking/Team.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1215,6 +1175,27 @@
         <state relative-caret-position="207">
           <caret line="85" column="44" selection-start-line="85" selection-start-column="44" selection-end-line="85" selection-end-column="44" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/PlayerTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestSuite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
