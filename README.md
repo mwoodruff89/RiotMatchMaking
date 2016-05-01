@@ -52,3 +52,83 @@ Furthermore, you may choose to specify two more arguments; a sorting rule [Sorte
 Java doc is provided in this project. Please find it in the 'docs' directory
 
 The Java doc also specifies in greater detail how the matching algorithms work.
+
+##Statistics
+
+The most interesting part!
+
+This program automatically logs details of every match and also the result of every match, so you can scroll through the logs if you wish and view the winning probability for each team and also their average Elo / Win rating score.
+
+The last items printed on the log (when doing multi matching) will tell you the following:
+1. The average match win/lose probability
+2. The average waiting time of all players
+3. The average amount of games played by all player (in this simulation)
+4. The final max elo difference (see below on how my Elo algorithm works to know what this means)
+
+Given that you can input different arguments for the matching algorithm, amount of matches, sorting and team sizes, I think you can play around quite a lot to see the different results different combinations give you.
+
+For example:
+
+Example 1: 100 Matches using Elo, Sorting and 5v5 matches:
+
+```
+AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.49802739033867716
+Average Waiting Time: 15.9
+Average Games in Sim: 5.1
+Max Elo Difference (initial is 20): 20.0
+```
+
+Example 2: 1000 matches using Elo, Non sorted, 3v3 matches:
+```
+AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.5009482015464723
+Average Waiting Time: 25.85
+Average Games in Sim: 30.15
+Max Elo Difference (initial is 20): 20.0
+```
+
+Example 3: 100 matches using WR, sorted, 2v2 matches:
+```
+AVERAGE Match Win/Lose Probability OF ALL GAMES: 0.5402696246079739
+Average Waiting Time: 0.0
+Average Games in Sim: 5.0
+Max Elo Difference (initial is 20): 20.0
+```
+
+Example 4: Single match using Elo, non sorted, 5v5:
+```
+*-- Match ---*
+Team Size: 5
+Average Rating: 1177.0999755859375
+Team 1: 
+Team Size: 5
+Average Elo Rating: 1179
+Average Win Rating: 0.6672969460487366
+Team 2: 
+Team Size: 5
+Average Elo Rating: 1175
+Average Win Rating: 0.6633237838745117
+
+Probabilty of Team 1 Winning: 0.5067945817123546
+Probability of Team 2 Winning: 0.4932054182876454
+Team 1 Won!
+
+```
+
+Example 5: Single match using WR, sorted, 1v1
+```
+*-- Match ---*
+Team Size: 1
+Average Rating: 0.5455995202064514
+Team 1: 
+Team Size: 1
+Average Elo Rating: 1105
+Average Win Rating: 0.5935762524604797
+Team 2: 
+Team Size: 1
+Average Elo Rating: 1009
+Average Win Rating: 0.4976228177547455
+
+Probabilty of Team 1 Winning: 0.5439669705211574
+Probability of Team 2 Winning: 0.4560330294788426
+Team 1 Won!
+```

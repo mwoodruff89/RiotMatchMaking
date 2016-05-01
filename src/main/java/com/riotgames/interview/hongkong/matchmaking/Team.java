@@ -85,7 +85,7 @@ public class Team {
     public String toString() {
 
         return "\n Team Size: " + teamSize() + "\n Average Elo Rating: " + getAverageElo() +
-                "\n Average Win Rating: " + getAverageElo();
+                "\n Average Win Rating: " + getAverageWinRating();
 
     }
 }
