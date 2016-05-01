@@ -311,4 +311,12 @@ public class SampleData {
             rank++;
         }
     }
+
+    /**
+     * Reset the player list to original values. Mainly used for unit testing
+     */
+    public static void resetPlayers() {
+
+        players = new ArrayList<Player>();
+    }
 }

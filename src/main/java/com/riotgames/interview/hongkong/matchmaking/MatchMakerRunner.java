@@ -22,7 +22,8 @@ public class MatchMakerRunner {
             System.out.println(match);
             System.out.println(match.getGame());
         }
-        match.playMatch();
+
+        matchmaker.playMatch(match);
 
         if(printStats) {
 

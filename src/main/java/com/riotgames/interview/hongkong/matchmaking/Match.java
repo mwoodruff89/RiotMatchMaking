@@ -59,6 +59,19 @@ public class Match {
     }
 
     /**
+     * Convenience method which returns all players from team 1 and team 2
+     * @return - The union of Set Team 1 and Set Team 2
+     */
+    public HashSet<Player> getAllPlayers() {
+
+        HashSet<Player> allPlayers = new HashSet<Player>();
+        allPlayers.addAll(this.team1.getPlayers());
+        allPlayers.addAll(this.team2.getPlayers());
+
+        return allPlayers;
+    }
+
+    /**
      * Constructor / initialiser method for the Match class. Will set the private instance variables based in the
      * input parameters.
      * @param team1

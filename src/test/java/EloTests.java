@@ -16,6 +16,8 @@ public class EloTests {
     @Before
     public void setup() {
 
+        SampleData.resetPlayers();
+        SampleData.getPlayers();
         testableMatchMaker = new MatchmakerImpl();
         matchedMatch = null;
     }
@@ -35,11 +37,8 @@ public class EloTests {
         //Test isFullyMatched flag is updated correctly
         assert (matchedMatch.isFullyMatched);
 
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam1());
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam2());
         //Test all team sizes are correct
-        assert (matchedMatch.getTeam1().teamSize() == teamSize);
-        assert (matchedMatch.getTeam2().teamSize() == teamSize);
+        assertValidEloRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 
     @Test
@@ -60,8 +59,7 @@ public class EloTests {
         assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         //Test all players in the team are within the rating
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam1());
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam1());
+        assertValidEloRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 
     @Test
@@ -81,8 +79,7 @@ public class EloTests {
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
         assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam1());
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam2());
+        assertValidEloRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 
     @Test
@@ -102,8 +99,7 @@ public class EloTests {
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
         assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam1());
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam2());
+        assertValidEloRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 
     @Test
@@ -123,41 +119,43 @@ public class EloTests {
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
         assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam1());
-        assetAllPlayersHaveValidEloRatingInTeam(matchedMatch.getTeam2());
+        assertValidEloRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 
     /**
      * Given a team of players, will assert if every player within that team is within
      * its' matches rating range
      *
+     * Note: The +1 is to account to round down division when calculating average ratings
      * @param team - The team which will be tested to see if every team member is within the maximum rating difference
      */
-    protected void assertAllPlayersHaveValidWinRatingInTeam(Team team) {
+    protected void assertValidWinRatingInTeam(Team team1, Team team2) {
 
-        for (Player player : team.getPlayers()) {
+        double team1ToMatchRatingDifference = team1.getAverageWinRating() -matchedMatch.averageRating;
+        assert (Math.abs(team1ToMatchRatingDifference) <= matchedMatch.maxDifference + 1);
 
-            double playerToMatchDifference = player.getWinRatio() - matchedMatch.averageRating;
-            assert (Math.abs(playerToMatchDifference) < matchedMatch.maxDifference);
+        double team2ToMatchRatingDifference = team2.getAverageWinRating() -matchedMatch.averageRating;
+        assert (Math.abs(team2ToMatchRatingDifference) <= matchedMatch.maxDifference + 1);
 
-            double teamToMatchRatingDifference = team.getAverageWinRating() - matchedMatch.averageRating;
-            assert (Math.abs(teamToMatchRatingDifference) < matchedMatch.maxDifference);
-        }
+        double team1ToTeam2MatchRatingDifference = team1.getAverageWinRating() - team2.getAverageWinRating();
+        assert (Math.abs(team1ToTeam2MatchRatingDifference) <= matchedMatch.maxDifference + 1);
     }
 
     /**
      * Given a team of players, this function will assert if every player within that team is within its'matches rating range
-     * @param team - The team which will be tested to see if every team member is within the maximum rating difference
+     * Note: The +1 is to account to round down division when calculating average ratings
+     * @param team1 - The first team in the match
+     * @param team2 - The second team in the match
      */
-    protected void assetAllPlayersHaveValidEloRatingInTeam(Team team) {
+    protected void assertValidEloRatingInTeam(Team team1, Team team2) {
 
-        for (Player player : team.getPlayers()) {
+        double team1ToMatchRatingDifference = team1.getAverageElo() - matchedMatch.averageRating;
+        assert (Math.abs(team1ToMatchRatingDifference) <= matchedMatch.maxDifference + 1);
 
-            double playerToMatchDifference = player.getEloRating() - matchedMatch.averageRating;
-            assert (Math.abs(playerToMatchDifference) < matchedMatch.maxDifference);
+        double team2ToMatchRatingDifference = team2.getAverageElo() - matchedMatch.averageRating;
+        assert (Math.abs(team2ToMatchRatingDifference) <= matchedMatch.maxDifference + 1);
 
-            double playerToMatchRatingDifference = team.getAverageElo() -matchedMatch.averageRating;
-            assert (Math.abs(playerToMatchRatingDifference) < matchedMatch.maxDifference);
-        }
+        double team1ToTeam2MatchRatingDifference = team1.getAverageElo() - team2.getAverageElo();
+        assert (Math.abs(team1ToTeam2MatchRatingDifference) <= matchedMatch.maxDifference + 1);
     }
 }

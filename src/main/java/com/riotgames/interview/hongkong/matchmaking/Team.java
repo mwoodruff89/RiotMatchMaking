@@ -81,7 +81,7 @@ public class Team {
         averageWinRating = totalWinRating / teamSize();
     }
 
-    //*---To String---*\\
+
     public String toString() {
 
         return "\n Team Size: " + teamSize() + "\n Average Elo Rating: " + getAverageElo() +

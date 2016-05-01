@@ -192,6 +192,26 @@ public class MatchmakerImpl implements Matchmaker {
     }
 
     /**
+     * Given that the match is in the fully matched matches set, will proeed to play the matches' game.
+     *
+     * @param match - The match to be played
+     */
+    public void playMatch(Match match) {
+
+        if(fullyMatchedMatches.contains(match)) {
+
+            System.out.println(match);
+            System.out.println(match.getGame());
+            match.playMatch();
+            System.out.println(match.getGame());
+            didFinishRound();
+        } else {
+
+            System.out.print("\n Cannot play this match as it is not fully matched");
+        }
+    }
+
+    /**
      * Given that there is a non empty set of fully matched matches, it will proceed to play those matches' games.
      */
     public void playMatches() {
@@ -216,18 +236,11 @@ public class MatchmakerImpl implements Matchmaker {
         //Move the matches between queus and update the player data to not match and update their waiting times.
         for(Match completedMatch : new ArrayList<Match>(fullyMatchedMatches)) {
 
-            for(Player team1Player : completedMatch.getTeam1().getPlayers()) {
+            for(Player player : completedMatch.getAllPlayers()) {
 
-                team1Player.setIsMatched(false);
-                team1Player.resetTimeWaiting();
-                team1Player.updateGamesPlayedInSim();
-            }
-
-            for(Player team2Player : completedMatch.getTeam2().getPlayers()) {
-
-                team2Player.setIsMatched(false);
-                team2Player.resetTimeWaiting();
-                team2Player.updateGamesPlayedInSim();
+                player.setIsMatched(false);
+                player.resetTimeWaiting();
+                player.updateGamesPlayedInSim();
             }
 
             fullyMatchedMatches.remove(completedMatch);
@@ -237,14 +250,9 @@ public class MatchmakerImpl implements Matchmaker {
         //Update the time waiting for these players
         for (Match matchStillWaiting : new ArrayList<Match>(matchingMatches)) {
 
-            for (Player waitingTeam1Player : matchStillWaiting.getTeam1().getPlayers()) {
+            for (Player waitingPlayer : matchStillWaiting.getAllPlayers()) {
 
-                waitingTeam1Player.updateTimeWaiting();
-            }
-
-            for (Player waitingTeam2Player : matchStillWaiting.getTeam2().getPlayers()) {
-
-                waitingTeam2Player.updateTimeWaiting();
+                waitingPlayer.updateTimeWaiting();
             }
         }
     }
@@ -268,15 +276,11 @@ public class MatchmakerImpl implements Matchmaker {
 
         for (Match match : new ArrayList<Match>(matchingMatches)) {
 
-            for(Player cancelledPlayerT1: match.getTeam1().getPlayers()) {
+            for (Player cancelledPlayer : match.getAllPlayers()) {
 
-                cancelledPlayerT1.setIsMatched(false);
+                cancelledPlayer.setIsMatched(false);
             }
 
-            for(Player cancelledPlayerT2 : match.getTeam2().getPlayers()) {
-
-                cancelledPlayerT2.setIsMatched(false);
-            }
             matchingMatches.remove(match);
             cancelledMatches.add(match);
         }

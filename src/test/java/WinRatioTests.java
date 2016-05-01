@@ -45,8 +45,7 @@ public class WinRatioTests extends EloTests {
         assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
         //Test all players in the team are within the rating
-        assertAllPlayersHaveValidWinRatingInTeam(matchedMatch.getTeam1());
-        assertAllPlayersHaveValidWinRatingInTeam(matchedMatch.getTeam1());
+        assertValidWinRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 
     @Test
@@ -66,8 +65,7 @@ public class WinRatioTests extends EloTests {
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
         assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
-        assertAllPlayersHaveValidWinRatingInTeam(matchedMatch.getTeam1());
-        assertAllPlayersHaveValidWinRatingInTeam(matchedMatch.getTeam2());
+        assertValidWinRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 
     @Test
@@ -87,8 +85,7 @@ public class WinRatioTests extends EloTests {
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
         assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
-        assertAllPlayersHaveValidWinRatingInTeam(matchedMatch.getTeam1());
-        assertAllPlayersHaveValidWinRatingInTeam(matchedMatch.getTeam2());
+        assertValidWinRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 
     @Test
@@ -108,7 +105,6 @@ public class WinRatioTests extends EloTests {
         assert (matchedMatch.getTeam1().teamSize() == teamSize);
         assert (matchedMatch.getTeam2().teamSize() == teamSize);
 
-        assertAllPlayersHaveValidWinRatingInTeam(matchedMatch.getTeam1());
-        assertAllPlayersHaveValidWinRatingInTeam(matchedMatch.getTeam2());
+        assertValidWinRatingInTeam(matchedMatch.getTeam1(), matchedMatch.getTeam2());
     }
 }

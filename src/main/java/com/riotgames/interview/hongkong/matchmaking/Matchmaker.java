@@ -80,6 +80,13 @@ public interface Matchmaker {
     void enterMatchmaking(Player player);
 
     /**
+     * The match maker will process and play the game of the given match. Then it will clean up the match from the matched list and
+     * move it to the completed list. Then, the match maker will release all players so they can be matched to another game.
+     * @param match
+     */
+    void playMatch(Match match);
+
+    /**
      * The match maker processes (play the games of) all the currently completed match ups. Then it will clean up all
      * the matches from the matched list and move them to the completed list. Then, the match maker will release all players
      * so they can be matched to another game
