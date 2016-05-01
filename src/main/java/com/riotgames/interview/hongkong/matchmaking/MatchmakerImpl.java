@@ -7,6 +7,21 @@ import java.util.List;
  */
 public class MatchmakerImpl implements Matchmaker {
 
+    /**
+     * Defines two different match making rules; WinRatio and Elo
+     * WinRatio
+     * Matchups are found based on the player's win ratio. (wins / (losses + wins)).
+     * Winning probabilities for WR matches are calculated by:
+     * Probability of T1 Win = T1 Average WR / (T1 Average WR + T2 Average WR)
+     *
+     * ELO
+     * Matchups are found based on the players Elo ranking. By default players enter the ladder at 1000 points.
+     * Because the sample data already has wins and losses (but we don't know WHO the player won / lost against), we use
+     * a simple formula to guess the player's Elo.
+     *
+     * Then, the Elo formula defined in in Game.java is utilised to calculate winning probabilities and how many points
+     * the winning / losing team gain / lose following a completed game
+     */
     public enum MatchMakingRule {
 
         WinRatio, Elo;

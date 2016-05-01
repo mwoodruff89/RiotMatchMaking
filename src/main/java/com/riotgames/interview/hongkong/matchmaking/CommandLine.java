@@ -5,13 +5,17 @@ import com.sun.jdi.connect.Connector;
 import java.util.ArrayList;
 
 /**
- * Created by michaelwoodruff on 30/4/2016.
+ * CommandLine class to handle input from user and to view stats
  */
 public class CommandLine {
 
     static final int kSingleMatchupArgCount = 3;
     static final int kMultiMatchupArgCount = 4;
 
+    /**
+     * Main method which initiates the program from command line / terminal
+     * @param args - The list of arguments input by the user at the command line
+     */
     public static void main(String [] args) {
 
         if(args.length == 0) {
@@ -81,6 +85,12 @@ public class CommandLine {
         }
     }
 
+    /**
+     * Convenience method to translate the rule argument from command line
+     * @param arg - the rule argument from the command line
+     * @return - MatchMakerImpl.MatchMakingRule representing if the user wants to use Elo or WR algorithm for matchmaking.
+     * Will return null if we can't extract a value
+     */
     private static MatchmakerImpl.MatchMakingRule ruleWithArg(String arg) {
 
         MatchmakerImpl.MatchMakingRule rule = null;
@@ -99,6 +109,11 @@ public class CommandLine {
         return rule;
     }
 
+    /**
+     * Convenience method to translate the isSorted argument from command line
+     * @param arg - the isSorted argument from the command line
+     * @return - Boolean for if the user wants the data to be sorted. Will return null if we can't extract a value
+     */
     private static Boolean isSortedWithArg(String arg) {
 
         Boolean isSorted = null;
