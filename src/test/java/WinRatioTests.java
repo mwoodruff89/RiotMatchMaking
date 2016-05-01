@@ -7,6 +7,13 @@ import com.riotgames.interview.hongkong.matchmaking.MatchmakerImpl;
 public class WinRatioTests extends EloTests {
 
     @Test
+    /**
+     * Given a team size of 1
+     * When we request to make a 1v1
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Win Ratio range
+     * And all team sizes must equal 1
+     */
     public void testMatch1v1() {
 
         int teamSize = 1;
@@ -20,6 +27,13 @@ public class WinRatioTests extends EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 2
+     * When we request to make a 2v2
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Win Ratio range
+     * And all team sizes must equal 2
+     */
     public void testMatch2v2() {
 
         int teamSize = 2;
@@ -35,6 +49,13 @@ public class WinRatioTests extends EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 3
+     * When we request to make a 3v3
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Win Ratio range
+     * And all team sizes must equal 3
+     */
     public void testMatch3v3() {
 
         int teamSize = 3;
@@ -49,6 +70,13 @@ public class WinRatioTests extends EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 4
+     * When we request to make a 4v4
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Win Ratio range
+     * And all team sizes must equal 4
+     */
     public void testMatch4v4() {
 
         int teamSize = 4;
@@ -63,6 +91,13 @@ public class WinRatioTests extends EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 5
+     * When we request to make a 5v5
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Win Ratio range
+     * And all team sizes must equal 5
+     */
     public void testMatch5v5() {
 
         int teamSize = 5;

@@ -20,6 +20,13 @@ public class EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 1
+     * When we request to make a 1v1
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Elo range
+     * And all team sizes must equal 1
+     */
     public void testMatch1v1Elo() {
 
         int teamSize = 1;
@@ -35,6 +42,13 @@ public class EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 2
+     * When we request to make a 2v2
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Elo range
+     * And all team sizes must equal 2
+     */
     public void testMatch2v2Elo() {
 
         int teamSize = 2;
@@ -50,6 +64,13 @@ public class EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 3
+     * When we request to make a 3v3
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Elo range
+     * And all team sizes must equal 3
+     */
     public void testMatch3v3Elo() {
 
         int teamSize = 3;
@@ -64,6 +85,13 @@ public class EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 4
+     * When we request to make a 4v4
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Elo range
+     * And all team sizes must equal 4
+     */
     public void testMatch4v4Elo() {
 
         int teamSize = 4;
@@ -78,6 +106,13 @@ public class EloTests {
     }
 
     @Test
+    /**
+     * Given a team size of 5
+     * When we request to make a 5v5
+     * Then the match flag should be updated to fully matched
+     * And all players must be within the required Elo range
+     * And all team sizes must equal 5
+     */
     public void testMatch5v5Elo() {
 
         int teamSize = 5;
@@ -92,7 +127,7 @@ public class EloTests {
     }
 
     /**
-     * Given a set which represents a team of players, will assert if every player within that team is within
+     * Given a team of players, will assert if every player within that team is within
      * its' matches rating range
      *
      * @param team - The team which will be tested to see if every team member is within the maximum rating difference
@@ -109,6 +144,10 @@ public class EloTests {
         }
     }
 
+    /**
+     * Given a team of players, this function will assert if every player within that team is within its'matches rating range
+     * @param team - The team which will be tested to see if every team member is within the maximum rating difference
+     */
     protected void assetAllPlayersHaveValidEloRatingInTeam(Team team) {
 
         for (Player player : team.getPlayers()) {
