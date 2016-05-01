@@ -41,6 +41,7 @@ public class Match {
      */
     private Game game = null;
 
+    //*---Getters---*\\
     public MatchmakerImpl getMatchmaker() { return matchmaker; }
 
     public Team getTeam1() { return team1; }
@@ -51,11 +52,20 @@ public class Match {
 
     public Game getGame() { return game; }
 
+    //*---Setters---*\\
     public void setkMaxDifferenceElo(double newDifference) {
 
         this.kMaxDifferenceElo = newDifference;
     }
 
+    /**
+     * Constructor / initialiser method for the Match class. Will set the private instance variables based in the
+     * input parameters.
+     * @param team1
+     * @param team2
+     * @param maxSize
+     * @param matchMaker
+     */
     public Match(HashSet<Player> team1, HashSet<Player> team2, int maxSize, MatchmakerImpl matchMaker) {
 
         this.team1 = new Team(team1);
@@ -139,6 +149,9 @@ public class Match {
         updateMeanRating();
     }
 
+    /**
+     * Play the game of the match
+     */
     public void playMatch() {
 
         game.playMatch();
@@ -177,6 +190,7 @@ public class Match {
         this.averageRating = totalAverage;
     }
 
+    //*---To String---*\\
     public String toString() {
 
         return "*-- Match ---*\nTeam Size: " + maxTeamSize + "\nAverage Rating: " + averageRating +

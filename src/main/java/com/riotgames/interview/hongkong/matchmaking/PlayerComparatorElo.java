@@ -3,11 +3,12 @@ package com.riotgames.interview.hongkong.matchmaking;
 import java.util.Comparator;
 
 /**
- * Created by michaelwoodruff on 30/4/2016.
+ * Comparator class to help sort Players based on Elo Rating
  */
 public class PlayerComparatorElo implements Comparator<Player> {
 
     public int compare(Player a, Player b) {
+
         if (a.getEloRating() > b.getEloRating()) {
 
             return -1;

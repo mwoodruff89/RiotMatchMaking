@@ -53,14 +53,24 @@ public class Team {
         }
     }
 
+    //*---Getters---\\\
     public Set<Player> getPlayers() { return players; }
-
-    public int teamSize() { return players.size(); }
 
     public int getAverageElo() { return averageElo; }
 
     public double getAverageWinRating() { return averageWinRating; }
 
+    /**
+     * Convenience method to get the amount of player in the team
+     * @return - Integer representing the size of the team
+     */
+    public int teamSize() { return players.size(); }
+
+    /**
+     * Adds a player to the team. Will update other instance variables in the team such as total elo / win ratio etc
+     * based on the player's stats.
+     * @param player - The player being added to the team.
+     */
     public void addPlayer(Player player) {
 
         players.add(player);
@@ -71,6 +81,7 @@ public class Team {
         averageWinRating = totalWinRating / teamSize();
     }
 
+    //*---To String---*\\
     public String toString() {
 
         return "\n Team Size: " + teamSize() + "\n Average Elo Rating: " + getAverageElo() +

@@ -2,7 +2,11 @@ package com.riotgames.interview.hongkong.matchmaking;
 import java.util.Random;
 
 /**
- * Created by michaelwoodruff on 30/4/2016.
+ * The Game class represents a Game for a match of two teams of players. A game can be played and a winning and losing team
+ * will be selected based on the winning probability of each team.
+ *
+ * Additionally, following a game being played, the Game class will update the players on each team by assigning them updated
+ * wins / losses and new Elo ratings.
  */
 public class Game {
 
@@ -57,6 +61,9 @@ public class Game {
         setupProbability();;
     }
 
+    //*---Getters---*\\\
+    public double getWinningProbility() { return winningProbility; }
+
     /**
      * Init helper method. Calculates the win probability of team 1 winning (and inversely team 2 winning)
      *
@@ -87,12 +94,9 @@ public class Game {
         }
     }
 
-    public Match getMatch() { return match; }
-
-    public double getWinningProbility() { return winningProbility; }
-
     /**
      * Randomly assigns a winner of the match based on the winning percentage for each team.
+     * It will also assign new win / loss values to each player object and update their Elo rating.
      */
     public void playMatch() {
 
@@ -110,7 +114,6 @@ public class Game {
             for (Player winningPlayer : winningTeam.getPlayers()) {
 
                 int newElo = (int) (winningPlayer.getEloRating() + kFactorForPlayer(winningPlayer) * (1 - expectedScoreWinner));
-                //System.out.printf("\nWinning Player: Old Score: %s New Score %s", winningPlayer.getEloRating(), newElo);
                 winningPlayer.setEloRating(newElo);
             }
 
@@ -118,7 +121,6 @@ public class Game {
             for (Player losingPlayer : losingTeam.getPlayers()) {
 
                 int newElo = (int) (losingPlayer.getEloRating() + kFactorForPlayer(losingPlayer) * (0 - expectedScoreLoser));
-                //System.out.printf("\nLosing Player. Old Score: %s New Score %s", losingPlayer.getEloRating(), newElo);
                 losingPlayer.setEloRating(newElo);
             }
         } else {
@@ -157,6 +159,7 @@ public class Game {
 
         return kFactor;
     }
+
     /**
      * Helper Method. Uses basic Java's basic random math function to get a random double between 0->1.
      * This number is then used to deduce the winner based on each teams winning probabilities
@@ -177,6 +180,7 @@ public class Game {
         }
     }
 
+    //*---To String---*\\
     public String toString() {
 
         if(losingTeam != null && winningTeam != null) {

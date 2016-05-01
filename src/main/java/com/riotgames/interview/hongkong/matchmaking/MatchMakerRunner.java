@@ -1,10 +1,17 @@
 package com.riotgames.interview.hongkong.matchmaking;
 
 /**
- * Created by michaelwoodruff on 1/5/2016.
+ * MatchMakerRunner creates instances of the MatchmakerImpl class and extracts a / a set of match /matches
  */
 public class MatchMakerRunner {
 
+    /**
+     * Given a set of parameters (below) will find a single match and print the results / stats
+     * @param playersPerTeam - Number of players required in the match
+     * @param rule - The Matching algorithm (Elo or Win Ratio)
+     * @param isSorted - Whether should keep a sorted list of the players to improve selection performance
+     * @param printStats - Flag to indicate if statistics should be printed to the console
+     */
     static void runSingleMatchMaker(int playersPerTeam,  MatchmakerImpl.MatchMakingRule rule, Boolean isSorted, Boolean printStats) {
 
         MatchmakerImpl matchmaker = new MatchmakerImpl();
@@ -23,10 +30,18 @@ public class MatchMakerRunner {
         }
     }
 
+    /**
+     * Given a set of parameters (below) will iteratively find a set of matches and then 'play' those mathches' games. Then,
+     * follow the games result will update the player's stats and then attempt to match another round of players.
+     * @param matchesToRun - Minimum number of matches for the runner to run
+     * @param playersPerTeam - Number of players in each team match
+     * @param rule - The matching rule / algorithm (Elo / Winning Ratio)
+     * @param isSorted - Whether we should keep a sorted list of players to improve player selection performance
+     * @param printStats -Flag to indicate if stats should be printed to the console
+     */
     static void runMatchMaker(int matchesToRun, int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted, Boolean printStats) {
 
         MatchmakerImpl matchmaker = new MatchmakerImpl();
-
         int playedMatches = 0;
 
         while (playedMatches < matchesToRun) {

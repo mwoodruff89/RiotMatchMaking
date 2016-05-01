@@ -88,6 +88,14 @@ public class Player {
      */
     private int gamesPlayedInSim = 0;
 
+    /**
+     * Constructor for the Player class. Creates an instance of a Player class.
+     * Additionally, it will check for any 'corrupted' or 'bad' data when the player is instantiated.
+     * Examples of corrupted data are; negative values, overflow values etc
+     * @param name - The Name of the player
+     * @param wins - The number of wins the player has
+     * @param losses - the number of losses the player has
+     */
     public Player(String name, long wins, long losses) {
 
         //Solve any data corruptions
@@ -125,9 +133,8 @@ public class Player {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+    //*---Getters---*\\
+    public String getName() { return name; }
 
     public long getWins() {
         return wins;
@@ -138,6 +145,14 @@ public class Player {
     }
 
     public double getWinRatio() {return winRatio; }
+
+    public Boolean getIsMatched() { return this.isMatched; }
+
+    public int getTimeWaiting() { return this.timeWaiting; }
+
+    public int getTotalTimeWaiting() { return this.totalTimeWaiting; }
+
+    public int getGamesPlayedInSim() { return this.gamesPlayedInSim; }
 
     public double getEloRating() {
 
@@ -150,6 +165,7 @@ public class Player {
         return this.eloRating;
     }
 
+    //*---Setters---*\\
     public void setEloRating(int newElo) {
 
         this.eloRating = newElo;
@@ -174,16 +190,7 @@ public class Player {
         this.isMatched = isMatched;
     }
 
-    public Boolean getIsMatched() {
-
-        return this.isMatched;
-    }
-
-    public int getTimeWaiting() {
-
-        return this.timeWaiting;
-    }
-
+    //--* Update Methods*--\\
     /**
      * Update the time waiting by one (probably because the player didn't get a game in this round)
      */
@@ -201,21 +208,15 @@ public class Player {
         this.timeWaiting = 0;
     }
 
-    public int getTotalTimeWaiting() {
-
-        return this.totalTimeWaiting;
-    }
-
+    /**
+     * Update the number of games the player has played in this program instance
+     */
     public void updateGamesPlayedInSim() {
 
         gamesPlayedInSim += 1;
     }
 
-    public int getGamesPlayedInSim() {
-
-        return this.gamesPlayedInSim;
-    }
-
+    //*---To string---*\\
     public String toString() {
 
         return "\n" + this.name + " / " + this.wins + "W / " + this.losses + "L / " + this.winRatio + "WR / " + this.eloRating + "ELO";

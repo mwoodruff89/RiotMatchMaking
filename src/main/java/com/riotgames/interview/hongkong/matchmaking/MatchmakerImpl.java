@@ -15,7 +15,7 @@ public class MatchmakerImpl implements Matchmaker {
     /**
      * Data structure to contain matches still not fully matched
      */
-    public final ArrayList<Match> matchingMatches = new ArrayList<Match>();
+    private final ArrayList<Match> matchingMatches = new ArrayList<Match>();
 
     /**
      * Data structure containing all the matches with players inside which are already fully matched
@@ -37,17 +37,24 @@ public class MatchmakerImpl implements Matchmaker {
      */
     private int playersPerTeam = 0;
 
+    /**
+     * The maximum difference between player's Elo rating
+     */
     private double maxEloDifference = 20;
 
+    /**
+     * The list of players we will attempt to match against eachother in this match maker system
+     */
     private List<Player> playerList;
+
     /**
      * The match making rule / algorithm to be utilised. Default is Elo but can be edited to use a different rule
      */
     public MatchmakerImpl.MatchMakingRule matchingRule;
 
-    public ArrayList<Match>getFullyMatchedMatches() { return fullyMatchedMatches; }
-
+    //Getters
     public ArrayList<Match>getCompletedMatches() { return completedMatches; }
+    public double getMaxEloDifference() { return this.maxEloDifference; }
 
     public Match findMatch(int playersPerTeam) {
 
@@ -57,11 +64,6 @@ public class MatchmakerImpl implements Matchmaker {
     public Match findMatchWithRule(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule) {
 
         return findMatchWithRuleAndIsSorted(playersPerTeam, rule, true);
-    }
-
-    public double getMaxEloDifference() {
-
-        return this.maxEloDifference;
     }
 
     public Match findMatchWithRuleAndIsSorted(int playersPerTeam, MatchmakerImpl.MatchMakingRule rule, Boolean isSorted) {
@@ -189,6 +191,9 @@ public class MatchmakerImpl implements Matchmaker {
         matchingMatches.add(newMatch);
     }
 
+    /**
+     * Given that there is a non empty set of fully matched matches, it will proceed to play those matches' games.
+     */
     public void playMatches() {
 
         for (Match match : fullyMatchedMatches) {
@@ -203,7 +208,8 @@ public class MatchmakerImpl implements Matchmaker {
     }
 
     /**
-     * Data handler method. Moves all the matched matches to the completed list and updates the players times.
+     * Data handler method. Moves all the matched matches to the completed list and updates the players times. Should be
+     * called following a set of games being played
      */
     private void didFinishRound() {
 

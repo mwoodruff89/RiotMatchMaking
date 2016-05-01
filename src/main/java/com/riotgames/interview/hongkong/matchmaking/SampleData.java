@@ -6,8 +6,14 @@ import java.util.List;
 
 public class SampleData {
 
-    public static List<Player> players = new ArrayList<Player>();
+    /**
+     * List of players to be used in match making
+     */
+    private static List<Player> players = new ArrayList<Player>();
 
+    /**
+     * Public instance variable to get the average rating of all the players in the list
+     */
     public static double averageRating = 0;
 
     /**
@@ -35,6 +41,10 @@ public class SampleData {
         return averageRating;
     }
 
+    /**
+     * Will lazy initialise and return the list of players
+     * @return - The list of places to use for match making
+     */
     public static List<Player> getPlayers() {
 
         if (players.size() == 0) {
@@ -246,12 +256,20 @@ public class SampleData {
         return SampleData.players;
     }
 
+    /**
+     * Returns Applies the PlayerComparatorWinRatio comparator class to sort the players by win ration
+     * @return - The list of players, sorted by the highest win ratio first
+     */
     public static List<Player> getPlayersSortedByWinRatio() {
 
         Collections.sort(SampleData.getPlayers(), new PlayerComparatorWinRatio());
         return SampleData.players;
     }
 
+    /**
+     * Returns Applies the PlayerComparatorWinElo comparator class to sort the players Elo rating
+     * @return - The list of players, sorted by the highest Elo rating first
+     */
     public static List<Player> getPlayersSortedByElo() {
 
         Collections.sort(SampleData.getPlayers(), new PlayerComparatorElo());

@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 /**
- * Created by michaelwoodruff on 30/4/2016.
+ * This test class runs tests to ensure the Elo matching algorithm matches players within the desired range
+ * and that matches are the correct size.
  */
 public class EloTests {
 

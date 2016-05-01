@@ -2,7 +2,8 @@ import org.junit.Test;
 import com.riotgames.interview.hongkong.matchmaking.MatchmakerImpl;
 
 /**
- * Created by michaelwoodruff on 29/4/2016.
+ * This test class runs tests to ensure the Win Rating matching algorithm matches players within the desired range
+ * and that matches are the correct size.
  */
 public class WinRatioTests extends EloTests {
 
