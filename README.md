@@ -171,4 +171,4 @@ This typically shouldn't happen in a larger match making system. However, consid
 
 #Unit Tests
 
-You may run unit tests using the 'All Tests' build configuration target
+You may run unit tests using the 'All Tests' build configuration target via IntelliJ
