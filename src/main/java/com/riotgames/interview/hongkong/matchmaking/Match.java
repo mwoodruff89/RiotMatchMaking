@@ -109,7 +109,7 @@ public class Match {
 
             //Both empty so basically starting a new match
             canAdd = true;
-        } else {
+        } else if(team1.teamSize() < maxTeamSize || team2.teamSize() < maxTeamSize){
 
             //Match already has players so can only add if the rating falls within the range
             if(matchmaker.matchingRule == MatchmakerImpl.MatchMakingRule.WinRatio) {
