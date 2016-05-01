@@ -9,11 +9,15 @@ Assignment by Michael Woodruff for Riot Games
 
 You should get the response:
 
+```
 Please specify command line arugments. Use java CommandLine Help for more info
+```
 
 As the response says, now run:
 
+```
 java com.riotgames.interview.hongkong.matchmaking.CommandLine Help
+```
 
 and you will get the command line argument specifications
 
