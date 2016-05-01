@@ -145,3 +145,7 @@ The forulae I used to award (or deduct) Elo points is taken from the online wiki
 To start with, if you run a multi-match match making service, then the system will attempt to match players together where their Elo Rating is within 20 points. However, after some games are played and the player's Elo rating increases / decreases, the range of the player's ELO increases, making it more difficult to find matches with a range of 200. Therefore, if the program cannot find any matches, it will iteratively increase the range by 20 until it can start making matches again.
 
 This typically shouldn't happen in a larger match making system. However, considering our pool has only 200 people and the total min/max range of Elo can be ~ 500 >= ~1500, this is necessary in order for the program to continue making matches. The drawback of this approach is because the Elo difference is greater, the winning probability of each team also becomes more unfair.  
+
+#Unit Tests
+
+You may run unit tests using the 'All Tests' build configuration target
